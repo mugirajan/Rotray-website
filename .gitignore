@@ -1,0 +1,7 @@
+db.php
+composer.lock
+vendor
+*.xlsx
+uploads/*
+log
+log/*
