@@ -213,9 +213,9 @@
 								      		<th scope="col">Name</th>
 								      		<th scope="col">Call Name</th>
 											<th scope="col">Mobile</th>
+											<th scope="col">Food Preference</th>
 											<th scope="col">Partner</th>
 											<th scope="col">Annette</th>
-											<th scope="col">Food Preference</th>
 								    	</tr>
 								  	</thead>
 								  	<tbody>
@@ -430,21 +430,53 @@
                         </td>\
                         <td><input type='text' class='form-control textBox' name='rotarian_call_name[]' id='rotarian_call_name"+count+"'></td>\
                         <td><input type='text' class='form-control textBox rotarian_mobile' name='rotarian_mobile[]' id='rotarian_mobile"+count+"'></td>\
-                        <td><input type='checkbox' class='ann-checkbox'></td>\
-						<td><input type='checkbox' class='annette-checkbox'></td>\
-						<td>\
-                            <select class='form-select' name='food_preference[]' id='food_preference_"+count+"'>\
+                        <td><select class='form-select' name='food_preference[]' id='food_preference_"+count+"'>\
                                 <option value=''>Select Food Preference</option>\
                                 <option value='Veg'>Veg</option>\
                                 <option value='Non Veg'>Non Veg</option>\
                                 <option value='Sat Veg Sunday Non Veg'>Sat Veg & Sunday Non Veg</option>\
                             </select>\
                         </td>\
+						<td><input type='button' value='add' class='add-partner-btn'></td>\
+						<td><input type='button' value='add' class='add-annette-btn'></td>\
                        </tr>";
 			return rotarianRowHtml;
 		}
 
+		function getAnnHTML(count) {
+			annRowHtml = "<tr class='partner-fields'>\
+					<th scope='row'>" + count + "</th>\
+					<td><input type='text' class='ann_name form-control textBox' name='ann_name[]' id='ann_name_" + count + "' placeholder='Partner Name'></td>\
+					<td><input type='text' class='form-control textBox ann_call_name' name='ann_call_name[]' id='ann_call_name_" + count + "' placeholder='Partner Call Name'></td>\
+					<td><input type='text' class='form-control textBox' name='ann_mobile[]' id='ann_mobile_" + count + "' placeholder='Partner Mobile'></td>\
+					<td><select class='form-select' name='ann_food_preference[]' id='ann_food_preference"+count+"'>\
+					<option value=''>Select Food Preference</option>\
+					<option value='Veg'>Veg</option>\
+					<option value='Non Veg'>Non Veg</option>\
+					<option value='Sat Veg Sunday Non Veg'>Sat Veg & Sunday Non Veg</option>\
+					</select></td>";
+			return annRowHtml;
+		}
+		
+		function getAnnetteHTML(count) {
+			rotarianRowHtml = "	<tr class='annette-fields'>\
+									<th scope='row'>"+count+"</th>\
+									<td>\
+										<input type='text' class='form-control textBox annette_name' name='annette_name[]' id='annette_name_"+count+"' placeholder='Annette Name'>\
+									</td>\
+									<td><input type='text' class='form-control textBox annette_call_name' name='annette_call_name[]'id='annette_call_name_"+count+"' placeholder='Annette Call Name'></td>\
+									<td><input type='text' class='form-control textBox' name='annette_mobile[]'id='annette_mobile"+count+"' placeholder='Annette Mobile'></td>\
+									<td><select class='form-select' name='annette_food_preference[]' id='ann_food_preference"+count+"'>\
+									<option value=''>Select Food Preference</option>\
+									<option value='Veg'>Veg</option>\
+									<option value='Non Veg'>Non Veg</option>\
+									<option value='Sat Veg Sunday Non Veg'>Sat Veg & Sunday Non Veg</option>\
+									</select></td>\
+								</tr>";
+			return rotarianRowHtml;
+		}
 
+		
 		function getGuestHTML(count) {
 			rotarianRowHtml= "<tr>\
 				<th scope='row'>"+count+"</th>\
@@ -458,30 +490,6 @@
 					<option value='Sat Veg Sunday Non Veg'>Sat Veg & Sunday Non Veg</option>\
 				</select></td>\
 			</tr>";
-			return rotarianRowHtml;
-		}
-
-		function getAnnHTML(count) {
-			rotarianRowHtml = "<tr>\
-							<th scope='row'>"+count+"</th>\
-							<td>\
-								<input type='text' class='ann_name form-control textBox' name='ann_name[]'id='ann_name_"+count+"'>\
-						</td>\
-						<td><input type='text' class='form-control textBox ann_call_name' name='ann_call_name[]'id='ann_call_name_"+count+"'></td>\
-						<td ><input type='text' class='form-control textBox' name='ann_mobile[]'id='ann_mobile"+count+"'></td>\
-						</tr>";
-			return rotarianRowHtml;
-		}
-		
-		function getAnnetteHTML(count) {
-			rotarianRowHtml = "	<tr>\
-									<th scope='row'>"+count+"</th>\
-									<td>\
-										<input type='text' class='form-control textBox annette_name' name='annette_name[]'id='annette_name_"+count+"'>\
-									</td>\
-									<td><input type='text' class='form-control textBox annette_call_name' name='annette_call_name[]'id='annette_call_name_"+count+"'></td>\
-									<td><input type='text' class='form-control textBox' name='annette_mobile[]'id='annette_mobile"+count+"'></td>\
-								</tr>";
 			return rotarianRowHtml;
 		}
 
@@ -588,7 +596,7 @@
 			
 			resetRotarian();
 		});
-		
+
 		$("#login").click(function(e){
 			window.location.href = "admin/";
 		});

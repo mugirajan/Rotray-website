@@ -54,8 +54,6 @@ $("#select-all-rotarians").change(function() {
 					<td>" + value.value + "</td>\
 					<td><input type='text' class='form-control' name='rotarian_call_name[]'></td>\
 					<td>" + value.mobile + "</td>\
-					<td><input type='checkbox' class='ann-checkbox'></td>\
-					<td><input type='checkbox' class='annette-checkbox'></td>\
 					<td>\
 						<select class='form-select' name='food_preference[]'>\
 						<option value=''>Select Food Preference</option>\
@@ -64,6 +62,8 @@ $("#select-all-rotarians").change(function() {
 						<option value='Sat Veg Sunday Non Veg'>Sat Veg & Sunday Non Veg</option>\
 						</select>\
 					</td>\
+					<td><input type='button' value='add' class='add-partner-btn'></td>\
+					<td><input type='button' value='add' class='add-annette-btn'></td>\
 					</tr>";
 					$('#rotarianTable tbody').append(rowHtml);
 					rowCount++;
@@ -185,6 +185,25 @@ function clearErrors() {
 	$(".error").remove();
 }
 
+$(document).on("click", ".add-partner-btn", function() {
+    var count = $(this).closest("tr").find("th").text();
+    var annHtml = getAnnHTML(count);
+
+    if ($(this).closest("tr").next(".partner-fields").length === 0) {
+        $(this).closest("tr").after(annHtml);
+    }
+});
+
+
+
+  $(document).on("click", ".add-annette-btn", function() {
+	var count = $(this).closest("tr").find("th").text();
+	var annetteHtml = getAnnetteHTML(count);
+	
+	if ($(this).closest("tr").next(".annette-fields").length === 0) {
+	  $(this).closest("tr").after(annetteHtml);
+	}
+  });
 
 
 
