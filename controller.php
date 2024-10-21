@@ -79,6 +79,7 @@
 	{
 		try {
 			$rotariansDetails = [];
+			$guestDetails = [];
 			$annDetails = [];
 			$annetteDetails = [];
 
@@ -86,7 +87,10 @@
 				"rotarianSearch" => "string",
 				"rotarian_mobile" => "string"
 			];
-
+			$questValidationRule = [
+				"guest_name" => "string",
+				"guest_call_name" =>"string"
+			];
 			$annValidationRule = [
 				"ann_name" => "string",
 				"ann_call_name" =>"string"
@@ -116,12 +120,14 @@
 			];
 			$transactionValidateResult = validateFormData($transactionData,$transactionValidateRule);
 			$rotariansValidateResult = validateFormData($formData,$rotarianValidationRule);
+			$guestValidateResult = validateFormData($formData,$guestValidationRule);
 			$annValidateResult = validateFormData($formData,$annValidationRule);
 			$annetteValidateResult = validateFormData($formData,$annetteValidationRule);
 
-			if(($rotariansValidateResult["error"]==1) || ($annValidateResult["error"] == 1) || ($annetteValidateResult["error"] == 1)||$transactionValidateResult['error'] == 1){
+			if(($rotariansValidateResult["error"]==1) || ($guestValidateResult["error"] == 1) || ($annValidateResult["error"] == 1) || ($annetteValidateResult["error"] == 1)||$transactionValidateResult['error'] == 1){
 				$validateErrors = [
 					"rotarian" => $rotariansValidateResult["data"],
+					"guest" => $guestValidateResult["data"],
 					"ann" => $annValidateResult["data"],
 					"annette" => $annetteValidateResult["data"],
 					"transaction" => $transactionValidateResult["data"]
@@ -142,6 +148,17 @@
 					"foodPrefrence"=> $formData['rotarian_checkVeg'][$i],
 					"rotarian_mobile"=>$formData['rotarian_mobile'][$i],
 					"member_type" => 1,
+					"fktransaction_id"=>$transactionRecord['id']
+				];
+			}
+
+			for ($i=0; $i < count($formData['guest_name']); $i++) { 
+				$annDetails[] = [
+					"ann_name" =>$formData['guest_name'][$i],
+					"ann_call_name"=> $formData['guest_call_name'][$i],
+					"foodPrefrence"=> $formData['guest_checkVeg'][$i],
+					"ann_mobile"=> $formData['guest_mobile'][$i],
+					"member_type" => 4,
 					"fktransaction_id"=>$transactionRecord['id']
 				];
 			}

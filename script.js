@@ -1,33 +1,81 @@
 var optionsHTML = "";
 
-
+// Original functionality (populating select options)
 $("#rotaryClubListSearch").change(function(){
 	var club = $(this).val();
 	
 	$.ajax({
-		url:"ajax.php",
-		method:"post",
-		data:{
-			"target":"getRotarians",
-			"data":{"value":club}
-		},
-		success:function(res){
-			var data = JSON.parse(res);
-			if (data.status == "success") {
-				data = data.data;
-				var rotarianOptionsHTML = "<option value =''>~~~ Select Rotarian ~~~</option>";
-				$.each(data,function(index,value) {
-					rotarianOptionsHTML += "<option value='"+value.key+"'>"+value.value+"</option>";
-				});
-				optionsHTML = rotarianOptionsHTML;
-				$(".rotarianSearch").html(optionsHTML);
-				$(".registerer_name").html(optionsHTML);
-				$('.rotarianSearch').select2();
-				$('.registerer_name').select2();
-			}
+	  url:"ajax.php",
+	  method:"post",
+	  data:{
+		"target":"getRotarians",
+		"data":{"value":club}
+	  },
+	  success:function(res){
+		var data = JSON.parse(res);
+		if (data.status == "success") {
+		  data = data.data;
+		  var rotarianOptionsHTML = "<option value =''>~~~ Select Rotarian ~~~</option>";
+		  $.each(data,function(index,value) {
+			rotarianOptionsHTML += "<option value='"+value.key+"'>"+value.value+"</option>";
+		  });
+		  optionsHTML = rotarianOptionsHTML;
+		  $(".rotarianSearch").html(optionsHTML);
+		  $(".registerer_name").html(optionsHTML);
+		  $('.rotarianSearch').select2();
+		  $('.registerer_name').select2();
 		}
+	  }
 	});
+  });
+  
+  // New functionality (populating table rows) when checkbox is checked
+$("#select-all-rotarians").change(function() {
+	if ($(this).is(':checked')) {
+		$("#rotaryClubListSearch").change(function(){
+			var club = $(this).val();
+			
+			$.ajax({
+			url:"ajax.php",
+			method:"post",
+			data:{
+				"target":"getRotarians",
+				"data":{"value":club}
+			},
+			success:function(res){
+				var data = JSON.parse(res);
+				if (data.status == "success") {
+				data = data.data;
+				var rowCount = 1;
+				$('#rotarianTable tbody').empty(); 
+				$.each(data, function(index, value) {
+					var rowHtml = "<tr>\
+					<th scope='row'>" + rowCount + "</th>\
+					<td>" + value.value + "</td>\
+					<td><input type='text' class='form-control' name='rotarian_call_name[]'></td>\
+					<td>" + value.mobile + "</td>\
+					<td><input type='checkbox' class='ann-checkbox'></td>\
+					<td><input type='checkbox' class='annette-checkbox'></td>\
+					<td>\
+						<select class='form-select' name='food_preference[]'>\
+						<option value=''>Select Food Preference</option>\
+						<option value='Veg'>Veg</option>\
+						<option value='Non Veg'>Non Veg</option>\
+						<option value='Sat Veg Sunday Non Veg'>Sat Veg & Sunday Non Veg</option>\
+						</select>\
+					</td>\
+					</tr>";
+					$('#rotarianTable tbody').append(rowHtml);
+					rowCount++;
+				});
+				}
+			}
+			});
+		});
+	}
 });
+
+  
 
 /*$("#registerer_club").change(function(){
 	var club = $(this).val();

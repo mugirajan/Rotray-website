@@ -90,6 +90,72 @@
 		   pointer-events: none; /* Disable pointer events */
 		   opacity: 0.5;
 		}
+		/* Style the container holding the checkboxes */
+		#rotariansCheckboxes {
+			border: 1px solid #ddd;
+			padding: 10px;
+			border-radius: 5px;
+			background-color: #f9f9f9;
+			max-height: 300px; 
+			overflow-y: auto;
+		}
+
+		#rotariansCheckboxes input[type="checkbox"] {
+			margin-right: 10px;
+		}
+
+		#rotariansCheckboxes div {
+			padding: 5px 0;
+			font-family: Arial, sans-serif;
+			font-size: 14px;
+		}
+
+		#rotariansCheckboxes label {
+			font-weight: bold;
+		}
+
+		#selectAllRotarians {
+			margin-right: 10px;
+		}
+
+		label[for="selectAllRotarians"] {
+			font-size: 16px;
+			color: #333;
+		}
+
+		#rotariansCheckboxes label:hover {
+			color: #007bff;
+			cursor: pointer;
+		}
+
+		#rotariansCheckboxes div:hover {
+			background-color: #e8f0fe;
+		}
+
+		#rotarianCard {
+			box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+			border-radius: 8px;
+			padding: 15px;
+			background-color: white;
+			margin-bottom: 20px;
+		}
+
+		#rotariansCheckboxes::-webkit-scrollbar {
+			width: 6px;
+		}
+
+		#rotariansCheckboxes::-webkit-scrollbar-track {
+			background: #f1f1f1;
+		}
+
+		#rotariansCheckboxes::-webkit-scrollbar-thumb {
+			background-color: #888;
+			border-radius: 10px;
+		}
+
+		#rotariansCheckboxes::-webkit-scrollbar-thumb:hover {
+			background: #555;
+		}
 	</style>
 	<body class="" style="padding-left: 9%;padding-right: 9%;">
 		<div class="row">
@@ -104,7 +170,12 @@
 				<input type="hidden" name="data" value="">
 
 				<div style="padding-left: 3.5%;padding-right: 3.5%">
-										
+					<!-- Select Rotarian Section -->
+					<div class="col-auto">
+						<input type="checkbox" id="select-all-rotarians" name="select-all-rotarians">
+						<label for="select-all-rotarians">Select All Rotarians</label>
+					</div>
+					<!--select rotarian-->				
 					<div class="form-group row">
 						<div class="col">
 							<label for="rotary_club_name" class="col-sm-2 col-form-label "><h5 class="required">Rotary Club of</h5></label>
@@ -122,10 +193,13 @@
 						  	<li class="nav-item" role="presentation">
 						    	<button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Rotarian</button>
 						  	</li>
-						  	<li class="nav-item" role="presentation">
+							<li class="nav-item" role="presentation">
+						    	<button class="nav-link" id="guest-tab" data-bs-toggle="tab" data-bs-target="#guest" type="button" role="tab" aria-controls="guest" aria-selected="false">Guest</button>
+						  	</li>
+						  	<li class="d-none nav-item" role="presentation">
 						    	<button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#ann" type="button" role="tab" aria-controls="profile" aria-selected="false">Ann</button>
 						  	</li>
-						  	<li class="nav-item" role="presentation">
+						  	<li class="d-none nav-item" role="presentation">
 						    	<button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#annette" type="button" role="tab" aria-controls="contact" aria-selected="false">Annette</button>
 						  	</li>
 						</ul>
@@ -138,7 +212,10 @@
 								      		<th scope="col">Sl.No</th>
 								      		<th scope="col">Name</th>
 								      		<th scope="col">Call Name</th>
-								      		<th scope="col">Mobile</th>
+											<th scope="col">Mobile</th>
+											<th scope="col">Partner</th>
+											<th scope="col">Annette</th>
+											<th scope="col">Food Preference</th>
 								    	</tr>
 								  	</thead>
 								  	<tbody>
@@ -150,6 +227,25 @@
 								<button type= "button" class="btn btn-info" id="add-rotrain" style="float: right;">Add</button>
 								
 							</div>
+							<div class="tab-pane fade" id="guest" role="tabpanel" aria-labelledby="guest-tab">
+						  		
+						  		<table class="table table-bordered table-hover" id="guestTable">
+								  	<thead>
+								    	<tr>
+								      		<th scope="col">Sl.No</th>
+								      		<th scope="col">Name</th>
+								      		<th scope="col">Call Name</th>
+								      		<th scope="col">Mobile</th>
+											<th scope="col">Food Preference</th>
+								    	</tr>
+								  	</thead>
+								  	<tbody>
+									    
+								  	</tbody>
+								</table>
+								<button type="button" class="btn btn-info" id="add-guest" style="float: right;">Add</button>
+								
+						  	</div>
 						  	<div class="tab-pane fade" id="ann" role="tabpanel" aria-labelledby="profile-tab">
 						  		
 						  		<table class="table table-bordered table-hover" id="annTable">
@@ -279,7 +375,7 @@
 				<b><hr></b>
 				<div class="row" style="text-align: center;">
 					<h4>For Communications: Rtn Kannan A, G1, Guru Jeeva Flats, 24, 5th Main Road, (Near Independence Day Park),
-Nanganallur, Chennai - 600061 / 99429 04699 / kannanhextar@gmail.com</h4>
+					Nanganallur, Chennai - 600061 / 99429 04699 / kannanhextar@gmail.com</h4>
 				</div>
 
 			</form>
@@ -296,6 +392,7 @@ Nanganallur, Chennai - 600061 / 99429 04699 / kannanhextar@gmail.com</h4>
 		var optionsvalues = <?php echo json_encode($rotarian_list);?>; 
 		var rowHtml ="";
 		var rotarianRowCount = 1;
+		var guestRowCount = 1; 
 		var annRowCount = 1;
 		var annetteRowCount = 1;
 		var optionsHTML = "";
@@ -326,22 +423,44 @@ Nanganallur, Chennai - 600061 / 99429 04699 / kannanhextar@gmail.com</h4>
 		}
 		
 		function getRotarianHTML(count) {
-			rotarianRowHtml = "<tr>\
-							<th scope='row'>"+count+"</th>\
-							<td>\
-								<select style='width: 100%' name ='rotarianSearch[]' id='rotarianSearch_"+count+"' class='rotarianSearch form-select'>"+optionsHTML;
-
-			/*$.each(optionsvalues,function(index,value) {
-				rotarianRowHtml += "<option value='"+value.key+"'>"+value.value+"</option>";
-			});*/
-
-			rotarianRowHtml +=	"</select>\
-						</td>\
-						<td><input type='text' class='form-control textBox' name='rotarian_call_name[]'id='rotarian_call_name"+count+"'></td>\
-						<td><input type='text' class='form-control textBox rotarian_mobile' name='rotarian_mobile[]'id='rotarian_mobile"+count+"'></td>\
-						</tr>";
+    				rotarianRowHtml = "<tr>\
+                        <th scope='row'>"+count+"</th>\
+                        <td>\
+                            <select style='width: 100%' name ='rotarianSearch[]' id='rotarianSearch_"+count+"' class='rotarianSearch form-select'>"+optionsHTML+"</select>\
+                        </td>\
+                        <td><input type='text' class='form-control textBox' name='rotarian_call_name[]' id='rotarian_call_name"+count+"'></td>\
+                        <td><input type='text' class='form-control textBox rotarian_mobile' name='rotarian_mobile[]' id='rotarian_mobile"+count+"'></td>\
+                        <td><input type='checkbox' class='ann-checkbox'></td>\
+						<td><input type='checkbox' class='annette-checkbox'></td>\
+						<td>\
+                            <select class='form-select' name='food_preference[]' id='food_preference_"+count+"'>\
+                                <option value=''>Select Food Preference</option>\
+                                <option value='Veg'>Veg</option>\
+                                <option value='Non Veg'>Non Veg</option>\
+                                <option value='Sat Veg Sunday Non Veg'>Sat Veg & Sunday Non Veg</option>\
+                            </select>\
+                        </td>\
+                       </tr>";
 			return rotarianRowHtml;
 		}
+
+
+		function getGuestHTML(count) {
+			rotarianRowHtml= "<tr>\
+				<th scope='row'>"+count+"</th>\
+				<td><input type='text' class='guest_name form-control textBox' name='guest_name[]' id='guest_name_"+count+"'></td>\
+				<td><input type='text' class='form-control textBox guest_call_name' name='guest_call_name[]' id='guest_call_name_"+count+"'></td>\
+				<td><input type='text' class='form-control textBox' name='guest_mobile[]' id='guest_mobile_"+count+"'></td>\
+				<td><select class='form-select' name='guest_food_preference[]' id='guest_food_preference_"+count+"'>\
+					<option value=''>Select Food Preference</option>\
+					<option value='Veg'>Veg</option>\
+					<option value='Non Veg'>Non Veg</option>\
+					<option value='Sat Veg Sunday Non Veg'>Sat Veg & Sunday Non Veg</option>\
+				</select></td>\
+			</tr>";
+			return rotarianRowHtml;
+		}
+
 		function getAnnHTML(count) {
 			rotarianRowHtml = "<tr>\
 							<th scope='row'>"+count+"</th>\
@@ -353,6 +472,7 @@ Nanganallur, Chennai - 600061 / 99429 04699 / kannanhextar@gmail.com</h4>
 						</tr>";
 			return rotarianRowHtml;
 		}
+		
 		function getAnnetteHTML(count) {
 			rotarianRowHtml = "	<tr>\
 									<th scope='row'>"+count+"</th>\
@@ -405,14 +525,17 @@ Nanganallur, Chennai - 600061 / 99429 04699 / kannanhextar@gmail.com</h4>
 		
 		$(document).ready(function() {
 			var rotarianTableElement = $("#rotarianTable");
+			var guestTableElement = $("guestTable");
 			var annTableElement = $("#annTable");
 			var annetteTableElement = $("#annetteTable");
 			
 			for (var i = 5; i >= 1; i--) {
 				rotarianTableElement.find('tbody').append(getRotarianHTML(rotarianRowCount));
+				guestTableElement.find('tbody').append(getGuestHTML(guestRowCount))
 				annTableElement.find('tbody').append(getAnnHTML(annRowCount));
 				annetteTableElement.find('tbody').append(getAnnetteHTML(annetteRowCount));
 				rotarianRowCount++;
+				guestRowCount++;
 				annRowCount++;
 				annetteRowCount++;
 			}
@@ -424,15 +547,26 @@ Nanganallur, Chennai - 600061 / 99429 04699 / kannanhextar@gmail.com</h4>
 		    resetRotarian();
 
 		});
-		$("#add-rotrain").click(function () {
-			var rotarianTableElement = $("#rotarianTable");
-			
 
-			rotarianTableElement.find('tbody').append(getRotarianHTML(rotarianRowCount));
-			rotarianRowCount++;
-			resetRotarian();
+		$("#add-rotrain").click(function() {
+			var rotarianTableElement = $("#rotarianTable");
+			var rowCount = rotarianTableElement.find('tbody tr').length + 1; 
+			
+			var rotarianRowHtml = getRotarianHTML(rowCount);
+			rotarianTableElement.find('tbody').append(rotarianRowHtml);
+			
 			$('.rotarianSearch').select2();
+			resetRotarian();
 		});
+
+		$("#add-guest").click(function () {
+			var guestTableElement = $("#guestTable");
+			var currentRowCount = $("#guestTable tbody tr").length + 1;
+			guestTableElement.find('tbody').append(getGuestHTML(currentRowCount));
+			$('.rotarianSearch').select2();
+			resetRotarian();
+		});
+
 
 		$("#add-ann").click(function () {
 			var annTableElement = $("#annTable");
@@ -454,6 +588,7 @@ Nanganallur, Chennai - 600061 / 99429 04699 / kannanhextar@gmail.com</h4>
 			
 			resetRotarian();
 		});
+		
 		$("#login").click(function(e){
 			window.location.href = "admin/";
 		});
@@ -478,7 +613,7 @@ Nanganallur, Chennai - 600061 / 99429 04699 / kannanhextar@gmail.com</h4>
 		            }
 		        });
 		}
-	});
+		});
 		
 	</script>
 	<script src="script.js"></script>

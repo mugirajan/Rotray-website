@@ -32,7 +32,7 @@
 		return array("status"=>"success","data"=>$data);
 	}
 
-	function saveFormData($data,$getFormCal = false){
+	function saveFormData($data, $getFormCal = false){
 		$formData = [];
 		foreach($data as $key => $value){
 			// if($key != 'rotaryClubListSearch'){
@@ -42,40 +42,40 @@
 				}
 				if(isset($formData[$index])){
 					if(strpos($index, "rotarian_checkVeg") !== false){
-						$formData["rotarian_checkVeg"][] =$value;
+						$formData["rotarian_checkVeg"][] = $value;
 					}elseif(strpos($index, "ann_checkVeg") !== false){
 						$formData["ann_checkVeg"][] = $value;
 					}elseif(strpos($index, "annette_checkVeg") !== false){
 						$formData["annette_checkVeg"][] = $value;
+					}elseif(strpos($index, "guest_checkVeg") !== false){ // New case for guests
+						$formData["guest_checkVeg"][] = $value;
 					}else{
 						$formData[$index] = $value;
 					}
 				}else{
 					if(strpos($index, "rotarian_checkVeg") !== false){
-						$formData["rotarian_checkVeg"][] =$value;
+						$formData["rotarian_checkVeg"][] = $value;
 					}elseif(strpos($index, "ann_checkVeg") !== false){
 						$formData["ann_checkVeg"][] = $value;
 					}elseif(strpos($index, "annette_checkVeg") !== false){
 						$formData["annette_checkVeg"][] = $value;
+					}elseif(strpos($index, "guest_checkVeg") !== false){ // New case for guests
+						$formData["guest_checkVeg"][] = $value;
 					}else{
 						$formData[$index] = $value;
 					}
 				}
-
-
 			// }
-			
 		}
 		if($getFormCal){
 			return $formData;
 		}
-		$result = formatAndInsertData($formData,$_FILES['receipt']);
+		$result = formatAndInsertData($formData, $_FILES['receipt']);
 		if($result["error"] == 1){
 		    return $result;
 		}else{
 			return $result;
 		}
-		
 		// return array("status"=>"success","message"=>"Data updated successfully","data"=>$result);
 	}
 
@@ -85,26 +85,31 @@
 		$rotarian_sum = 0;
 		$ann_sum = 0;
 		$annette_sum = 0;
+		$guest_sum = 0; // Initialize guest sum
 
 		foreach($formData['rotarianSearch[]'] as $rotarian){
 			if($rotarian != ""){
-				$rotarian_sum = $rotarian_sum + 1500;
+				$rotarian_sum += 1500;
 			}
 		}
 		foreach($formData['ann_name[]'] as $ann){
 			if($ann != ""){
-				$ann_sum = $ann_sum + 1500;
+				$ann_sum += 1500;
 			}
 		}
 		foreach($formData['annette_name[]'] as $annette){
 			if($annette != ""){
-				$annette_sum = $annette_sum + 1500;
+				$annette_sum += 1500;
 			}
 		}
-		$total = $rotarian_sum + $ann_sum + $annette_sum; 
-		
+		foreach($formData['guest_name[]'] as $guest){ 
+			if($guest != ""){
+				$guest_sum += 1500; 
+			}
+		}
+		$total = $rotarian_sum + $ann_sum + $annette_sum + $guest_sum; // Include guest total
 
-		return array("rotarian" => $rotarian_sum,"ann" => $ann_sum,"annette" => $annette_sum,"total" => $total);
+		return array("rotarian" => $rotarian_sum,"ann" => $ann_sum,"annette" => $annette_sum,"guest" => $guest_sum, "total" => $total);
 	}
 
 	function formDataArrange($data){
@@ -114,33 +119,35 @@
 				$index = $form['name'];
 				if(isset($formData[$index])){
 					if(strpos($index, "rotarian_checkVeg") !== false){
-						$formData["rotarian_checkVeg"][] =$form['value'];
+						$formData["rotarian_checkVeg"][] = $form['value'];
 					}elseif(strpos($index, "ann_checkVeg") !== false){
 						$formData["ann_checkVeg"][] = $form['value'];
 					}elseif(strpos($index, "annette_checkVeg") !== false){
 						$formData["annette_checkVeg"][] = $form['value'];
-					}elseif(strpos($index, "rotarianSearch")){
+					}elseif(strpos($index, "guest_checkVeg") !== false){ // Handle guests
+						$formData["guest_checkVeg"][] = $form['value'];
+					}elseif(strpos($index, "rotarianSearch") !== false){
 						$formData["rotarianSearch"][] = $form['value'];
 					}else{
 						$formData[$index][] = $form['value'];
 					}
 				}else{
 					if(strpos($index, "rotarian_checkVeg") !== false){
-						$formData["rotarian_checkVeg"][] =$form['value'];
+						$formData["rotarian_checkVeg"][] = $form['value'];
 					}elseif(strpos($index, "ann_checkVeg") !== false){
 						$formData["ann_checkVeg"][] = $form['value'];
 					}elseif(strpos($index, "annette_checkVeg") !== false){
 						$formData["annette_checkVeg"][] = $form['value'];
-					}elseif(strpos($index, "rotarianSearch")){
+					}elseif(strpos($index, "guest_checkVeg") !== false){ // Handle guests
+						$formData["guest_checkVeg"][] = $form['value'];
+					}elseif(strpos($index, "rotarianSearch") !== false){
 						$formData["rotarianSearch"][] = $form['value'];
 					}else{
 						$formData[$index][] = $form['value'];
 					}
 				}
-
-
 			}
-			
 		}
 		return $formData;
-	}
+}
+	
