@@ -180,7 +180,7 @@
 					<div class="form-group row">
 						<div class="col">
 							<label for="rotary_club_name" class="col-sm-2 col-form-label "><h5 class="required">Rotary Club of</h5></label>
-					    	<select style="width: 100%" name ="rotaryClubListSearch" id="rotaryClubListSearch" class="rotaryClubListSearch form-select">
+					    	<select  name ="rotaryClubListSearch" id="rotaryClubListSearch" class="rotaryClubListSearch form-select">
 					    		<option value=""></option>
 							  	<?php foreach($rotaryClubList as $option){?>
 							  		<option value="<?php echo $option['key'];?>"><?php echo $option['value'];?></option>
@@ -287,7 +287,7 @@
 						</div>
 					</div>
 				</div>
-				<div  class="d-none" style="padding-left: 3.5%;padding-right: 3.5%">
+				<div  style="padding-left: 3.5%;padding-right: 3.5%">
 					<table class="table table-bordered table-hover" id="paymentTable">
 						<thead>
 							<tr>
@@ -309,7 +309,7 @@
 						</tbody>
 					</table>
 				</div>
-				<div class="d-none" style="text-align: center;padding-left: 3.5%;padding-right: 3.5%">
+				<div style="text-align: center;padding-left: 3.5%;padding-right: 3.5%">
 					<h5>Payment to be made in the form of Cheque / DD / NEFT / RTGS to</h5>
 					<h5>A Sridharan - HDFC BANK - A/C.NO. 01411000069004, IFSC - HDFC0000141</h4>
 						<hr>
@@ -349,7 +349,7 @@
 							<div class="col-sm-4">
 								<div class="form-group">
 									<label class="required"> Registerer Name</label>
-									<select style='width: 100%' name ='registerer_name' id='registerer_name' class='registerer_name form-select'>
+									<select  name ='registerer_name' id='registerer_name' class='registerer_name form-select'>
 										<option value=""></option>
 									</select>
 								</div>
@@ -431,7 +431,7 @@
     rotarianRowHtml = "<tr>\
         <th scope='row'>"+count+"</th>\
         <td>\
-            <select style='width: 100%' name ='rotarianSearch[]' id='rotarianSearch_"+count+"' class='rotarianSearch form-select'>"+optionsHTML+"</select>\
+            <select  name ='rotarianSearch[]' id='rotarianSearch_"+count+"' class='rotarianSearch form-select'>"+optionsHTML+"</select>\
         </td>\
         <td><input type='text' class='form-control textBox' name='rotarian_call_name[]' id='rotarian_call_name"+count+"'></td>\
         <td><input type='text' class='form-control textBox rotarian_mobile' name='rotarian_mobile[]' id='rotarian_mobile"+count+"'></td>\
