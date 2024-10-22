@@ -75,8 +75,6 @@ $("#select-all-rotarians").change(function() {
 	}
 });
 
-  
-
 /*$("#registerer_club").change(function(){
 	var club = $(this).val();
 	
@@ -103,75 +101,77 @@ $("#select-all-rotarians").change(function() {
 	});
 });
 */
+
 $("#registerer_name").change(function(){
 
-				calculateMemberRegistrationFee();
-				var rotarianMemberId = $(this).val();
-				var element = $(this);
-				$.ajax({
-					url:"ajax.php",
-					method:"post",
-					data:{
-						"target":"getRotarianDetail",
-						"data":{"value":rotarianMemberId}
-					},
-					success:function(res){
-						var response = JSON.parse(res);
-						if(response.status = "success"){
-							var data = response.data;
-							// console.log(data.mobile_no);
-							
-							$("#registerer_mobile").val(data.mobile_no);
-							$("#registerer_email").val(data.email);
+	calculateMemberRegistrationFee();
+	var rotarianMemberId = $(this).val();
+	var element = $(this);
+	$.ajax({
+		url:"ajax.php",
+		method:"post",
+		data:{
+			"target":"getRotarianDetail",
+			"data":{"value":rotarianMemberId}
+		},
+		success:function(res){
+			var response = JSON.parse(res);
+			if(response.status = "success"){
+				var data = response.data;
+				// console.log(data.mobile_no);
+				
+				$("#registerer_mobile").val(data.mobile_no);
+				$("#registerer_email").val(data.email);
 
-						}
-					}
-				});
-			});
+			}
+		}
+	});
+});
+
 $("#rotarianRegister").on("submit",function(e){
 	e.preventDefault();
 	// var data = $("form").serializeArray();
 	var data = new FormData(this);
 	
-		$('body').addClass("disabled blur");
-		$('.loading').show();
+	$('body').addClass("disabled blur");
+	$('.loading').show();
 
-		console.log("Submittd");
-	
-	// $.ajax({
-	// 	url:"ajax.php",
-	// 	method:"post",
-	// 	processData: false, // Prevent jQuery from processing the data
-    //     contentType: false,
-	// 	data:data,
-	// 	success:function(res){
-	// 		var response = JSON.parse(res);
-	// 		// console.log(response);
-	// 		$('.loading').css("display","none");
-	// 		$('body').removeClass("disabled blur");	
-	// 		if(response.error == 1) {
-	// 			clearErrors();
-	// 			var transactionErrors = response.data.transaction;
-	// 			var rotarianErrors = response.data.rotarian;
-	// 			var annErrors = response.data.ann;
-	// 			var annetteErrors = response.data.annette;
-	// 			var guesstErrors = response.data.guest;
-	// 			if( Object.keys(transactionErrors).length > 0 )
-	// 				messagevalidation(transactionErrors);
-	// 			if( Object.keys(annErrors).length > 0 )
-	// 				messagevalidation(annErrors);
-	// 			if( Object.keys(annetteErrors).length > 0 )
-	// 				messagevalidation(annetteErrors);
-	// 			if( Object.keys(guestErrors).length > 0 )
-	// 				messagevalidation(guestErrors);
-	// 		}else{
-	// 			alert("Rotarians are registered successfully!.");
-	// 			window.location.reload();
-	// 			$('.loading').css("display","none");
-	// 			$('body').removeClass("disabled blur");
-	// 		}
-	// 	}
-	// });
+	console.log("Submittd");
+
+	$.ajax({
+		url:"ajax.php",
+		method:"post",
+		processData: false, // Prevent jQuery from processing the data
+		contentType: false,
+		data:data,
+		success:function(res){
+			var response = JSON.parse(res);
+			// console.log(response);
+			$('.loading').css("display","none");
+			$('body').removeClass("disabled blur");	
+			if(response.error == 1) {
+				clearErrors();
+				var transactionErrors = response.data.transaction;
+				var rotarianErrors = response.data.rotarian;
+				var annErrors = response.data.ann;
+				var annetteErrors = response.data.annette;
+				var guesstErrors = response.data.guest;
+				if( Object.keys(transactionErrors).length > 0 )
+					messagevalidation(transactionErrors);
+				if( Object.keys(annErrors).length > 0 )
+					messagevalidation(annErrors);
+				if( Object.keys(annetteErrors).length > 0 )
+					messagevalidation(annetteErrors);
+				if( Object.keys(guestErrors).length > 0 )
+					messagevalidation(guestErrors);
+			}else{
+				alert("Rotarians are registered successfully!.");
+				window.location.reload();
+				$('.loading').css("display","none");
+				$('body').removeClass("disabled blur");
+			}
+		}
+	});
 });
 
 function messagevalidation(data){

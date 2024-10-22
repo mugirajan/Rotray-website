@@ -157,10 +157,12 @@
 			background: #555;
 		}
 	</style>
-	<body class="" style="padding-left: 9%;padding-right: 9%;">
+	<body class="" style="text-align: center;">
+	<section style="width: 90%;margin: auto">
 		<div class="row">
 			<div class="col">
-				<img src="sangamam.png" style="width:100%">
+				<!-- <img src="sangamam.png" style="width:100%"> -->
+				<img src="./229241.jpg" style="width:100%">
 			</div>
 		</div>
 		<div> 
@@ -177,8 +179,8 @@
 					</div>
 					<!--select rotarian-->				
 					<div class="form-group row">
-						<div class="col">
-							<label for="rotary_club_name" class="col-sm-2 col-form-label "><h5 class="required">Rotary Club of</h5></label>
+						<div class="col" style="text-align:left">
+							<label for="rotary_club_name" class="col-sm-2 col-form-label"><h5 class="required">Rotary Club of</h5></label>
 					    	<select style="width: 100%" name ="rotaryClubListSearch" id="rotaryClubListSearch" class="rotaryClubListSearch form-select">
 					    		<option value=""></option>
 							  	<?php foreach($rotaryClubList as $option){?>
@@ -308,8 +310,8 @@
 					</table>
 				</div>
 				<div style="text-align: center;padding-left: 3.5%;padding-right: 3.5%">
-					<h5>Payment to be made in the form of Cheque / DD / NEFT / RTGS to</h5>
-					<h5>A Sridharan - HDFC BANK - A/C.NO. 01411000069004, IFSC - HDFC0000141</h4>
+					<h5>Payment to be made in the form of Cheque / DD / NEFT / RTGS / UPI to</h5>
+					<h5> Punniyamoorthy V. - City Union Bank - A/C.NO. 5001010133990970, IFSC - CIUB0000338</h4>
 						<hr>
 					<h4>PAYMENT DETAILS</h4>
 					<div style="text-align:left;">
@@ -329,7 +331,7 @@
 
 							<div class="col-sm-4" >
 							  	<div class="form-group">
-								    <label for="formFile" class="form-label required">Payment Confirmation </label>
+								    <label for="formFile" class="form-label required">Proof of Payment </label>
 						 			<input class="form-control" type="file" name ="receipt" id="formFile">
 								</div>	
 							</div>
@@ -370,19 +372,35 @@
 				</div>
 				<br>
 				<div class="row">
-				  	<div class="input-group" style="text-align: right;">
+				  	<div class="input-group" style="text-align: center;">
 					    <button type="submit" class="btn btn-primary" class="submit" >Submit</button>
 					</div>	
 				</div>
 				<b><hr></b>
+				<div class="">
+					<div style="text-align: center;">
+						<strong>
+							<a href="website-terms-and-conditions.html">Website Terms & Conditions</a>
+								|| 
+							<a href="rid-3234-privacy-policy.html">RID 3234 Privacy Policy</a>
+								|| 
+							<a href="rid-3234-return-policy.html">Return Policy</a>
+						</strong>
+					</div>	
+				</div>
+				
+				<!-- 
 				<div class="row" style="text-align: center;">
 					<h4>For Communications: Rtn Kannan A, G1, Guru Jeeva Flats, 24, 5th Main Road, (Near Independence Day Park),
 					Nanganallur, Chennai - 600061 / 99429 04699 / kannanhextar@gmail.com</h4>
 				</div>
+				 -->
 
 			</form>
 		</div>
-		<?php if($login == False){ ?>
+	</section>
+		
+	<?php if($login == False){ ?>
 		<!-- <div class="float-button btn btn-primary login" id="login"> Admin</div> -->
 		<?php }else{?>
 		<div class="btn float-button login" id="logout">Exit</div>
@@ -498,7 +516,7 @@
 
 		function resetRotarian() {
 			$(".rotarianSearch").change(function(){
-				// console.log("Captured Ann event")
+				console.log("Captured rot event")
 				calculateMemberRegistrationFee();
 				var rotarianMemberId = $(this).val();
 				var element = $(this);
@@ -514,33 +532,25 @@
 						if(response.status = "success"){
 							var data = response.data;
 							// console.log(data.mobile_no);
-							
 							element.closest("tr").find(".rotarian_mobile").val(data.mobile_no);
-
 						}
 					}
 				});
 			});
 
-
-
-			$(".ann_name").on("change",function(){
+			$(".ann_name").change(function(){
 				console.log("Captured Ann event")
 				calculateMemberRegistrationFee();
 			});	
-			$(".annette_name").on("change",function(){
-				console.log("Captured Ann event")
+			$(".annette_name").change(function(){
+				console.log("Captured Annette event")
 				calculateMemberRegistrationFee();
 			});	
-			$(".guest_name").on("change",function(){
-				console.log("Captured Ann event")
+			$(".guest_name").change(function(){
+				console.log("Captured guest event")
 				calculateMemberRegistrationFee();
 			});	
-
-
 		}
-
-		
 		
 		$(document).ready(function() {
 			var rotarianTableElement = $("#rotarianTable");

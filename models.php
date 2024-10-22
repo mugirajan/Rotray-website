@@ -88,7 +88,7 @@ function insertAnnDetails($data)
 {
     foreach ($data as $row) {
         if($row['ann_name'] != "") {
-            $sql = "INSERT INTO register_event (name, call_name, type, food_preference, mobile, fktransaction_id) VALUES ('".$row['ann_name']."', '".$row['ann_call_name']."', 2, {$row['foodPrefrence']}, '".$row['ann_mobile']."', ".$row['fktransaction_id'].")";
+            $sql = "INSERT INTO register_event (name, call_name, type, food_preference, mobile, fktransaction_id) VALUES ('".$row['ann_name']."', '".$row['ann_call_name']."', 2, '', '".$row['ann_mobile']."', ".$row['fktransaction_id'].")";
             
             if ($GLOBALS['conn']->query($sql) !== TRUE) {
                 message("Error: " . $sql . "<br>" . $GLOBALS['conn']->error);
@@ -101,7 +101,7 @@ function insertAnnetteDetails($data)
 {
     foreach ($data as $row) {
         if($row['annette_name'] != "") {
-            $sql = "INSERT INTO register_event (name, call_name, type, food_preference, mobile, fktransaction_id) VALUES ('".$row['annette_name']."', '".$row['annette_call_name']."', 3, {$row['foodPrefrence']}, '".$row['annette_mobile']."', ".$row['fktransaction_id'].")";
+            $sql = "INSERT INTO register_event (name, call_name, type, food_preference, mobile, fktransaction_id) VALUES ('".$row['annette_name']."', '".$row['annette_call_name']."', 3, '', '".$row['annette_mobile']."', ".$row['fktransaction_id'].")";
             
             if ($GLOBALS['conn']->query($sql) !== TRUE) {
                 message("Error: " . $sql . "<br>" . $GLOBALS['conn']->error);
