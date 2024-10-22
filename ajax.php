@@ -1,5 +1,6 @@
 <?php
 	include 'controller.php';
+	$f = "file2.txt";
 
 	$method = $_POST['target']; 
 	$getData = $_POST['data'];
@@ -15,7 +16,10 @@
 			echo json_encode(saveFormData($_REQUEST));
 			break;
 		case 'calculateMemberRegistrationFee':
-			echo json_encode(calculateMemberFees($getData['value']));
+			file_put_contents($f, "SEssion unset", FILE_APPEND | LOCK_EX);
+			// file_put_contents($f, print_r("Data received :", true), FILE_APPEND | LOCK_EX);
+			// file_put_contents($f, print_r($getData['value'], true), FILE_APPEND | LOCK_EX);
+			echo json_encode(calculateMemberFees($getData['value']), FILE_APPEND | LOCK_EX);
 			break;
 		default:
 			return print("Undefined function...");
@@ -81,6 +85,8 @@
 
 	function calculateMemberFees($data)
 	{
+		$ff = "file.txt";
+
 		$formData = formDataArrange($data);
 
 		$rotarian_sum = 0;
@@ -89,9 +95,11 @@
 		$guest_sum = 0;
 
 
-		if (isset($formData['rotarianSearch[]']) && is_array($formData['rotarianSearch[]'])) {
-			foreach($formData['rotarianSearch[]'] as $rotarian){
+		if (isset($formData['rotarianSearch'])) {
+			foreach($formData['rotarianSearch'] as $rotarian){
 				if($rotarian != ""){
+					// file_put_contents($ff, print_r("Data:".PHP_EOL, true), FILE_APPEND | LOCK_EX );
+					// file_put_contents($ff, print_r($rotarian, true), FILE_APPEND | LOCK_EX);
 					$rotarian_sum += 1500;
 				}
 			}
@@ -135,6 +143,8 @@
 
 
 	function formDataArrange($data){
+		$f = "file2.txt";
+
 		$formData = [];
 		foreach($data as $form){
 			if($form['name'] != 'rotaryClubListSearch'){
@@ -168,8 +178,11 @@
 						$formData[$index][] = $form['value'];
 					}
 				}
+
 			}
 		}
+		file_put_contents($f, print_r( $formData ,true), FILE_APPEND | LOCK_EX);	
 		return $formData;
-}
+	}
 	
+?>

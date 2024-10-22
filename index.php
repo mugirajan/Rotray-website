@@ -411,10 +411,10 @@
 				data:{
 					"target":"calculateMemberRegistrationFee",
 					"data":{
-						"value":data
+						"value": data
 					}
 				},
-				success:function(res){
+				success: function(res){
 					var response = JSON.parse(res);
 					$("#rotarianTotal").html(response.rotarian);				
 					$("#annTotal").html(response.ann);				
@@ -498,7 +498,7 @@
 
 		function resetRotarian() {
 			$(".rotarianSearch").change(function(){
-
+				// console.log("Captured Ann event")
 				calculateMemberRegistrationFee();
 				var rotarianMemberId = $(this).val();
 				var element = $(this);
@@ -522,13 +522,18 @@
 				});
 			});
 
+
+
 			$(".ann_name").on("change",function(){
+				console.log("Captured Ann event")
 				calculateMemberRegistrationFee();
 			});	
 			$(".annette_name").on("change",function(){
+				console.log("Captured Ann event")
 				calculateMemberRegistrationFee();
 			});	
 			$(".guest_name").on("change",function(){
+				console.log("Captured Ann event")
 				calculateMemberRegistrationFee();
 			});	
 
@@ -543,7 +548,7 @@
 			var annTableElement = $("#annTable");
 			var annetteTableElement = $("#annetteTable");
 			
-			for (var i = 5; i >= 1; i--) {
+			for (var i = 1; i >= 1; i--) {
 				rotarianTableElement.find('tbody').append(getRotarianHTML(rotarianRowCount));
 				guestTableElement.find('tbody').append(getGuestHTML(guestRowCount))
 				annTableElement.find('tbody').append(getAnnHTML(annRowCount));

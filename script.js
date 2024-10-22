@@ -135,55 +135,49 @@ $("#rotarianRegister").on("submit",function(e){
 	
 		$('body').addClass("disabled blur");
 		$('.loading').show();
+
+		console.log("Submittd");
 	
-	$.ajax({
-		url:"ajax.php",
-		method:"post",
-		processData: false, // Prevent jQuery from processing the data
-        contentType: false,
-		data:data,
-		success:function(res){
-			var response = JSON.parse(res);
-			// console.log(response);
-			$('.loading').css("display","none");
-			$('body').removeClass("disabled blur");	
-			if(response.error ==1){
-				clearErrors();
-				var transactionErrors = response.data.transaction;
-				var rotarianErrors = response.data.rotarian;
-				var annErrors = response.data.ann;
-				var annetteErrors = response.data.annette;
-				var guesstErrors = response.data.guest;
-				if( Object.keys(transactionErrors).length > 0 )
-					messagevalidation(transactionErrors);
-
-				if( Object.keys(annErrors).length > 0 )
-					messagevalidation(annErrors);
-
-				if( Object.keys(annetteErrors).length > 0 )
-					messagevalidation(annetteErrors);
-
-				if( Object.keys(guestErrors).length > 0 )
-					messagevalidation(guestErrors);
-
-						
-				
-			}else{
-				alert("Rotarians are registered successfully!.");
-				window.location.reload();
-				$('.loading').css("display","none");
-				$('body').removeClass("disabled blur");
-			}
-		}
-	});
+	// $.ajax({
+	// 	url:"ajax.php",
+	// 	method:"post",
+	// 	processData: false, // Prevent jQuery from processing the data
+    //     contentType: false,
+	// 	data:data,
+	// 	success:function(res){
+	// 		var response = JSON.parse(res);
+	// 		// console.log(response);
+	// 		$('.loading').css("display","none");
+	// 		$('body').removeClass("disabled blur");	
+	// 		if(response.error == 1) {
+	// 			clearErrors();
+	// 			var transactionErrors = response.data.transaction;
+	// 			var rotarianErrors = response.data.rotarian;
+	// 			var annErrors = response.data.ann;
+	// 			var annetteErrors = response.data.annette;
+	// 			var guesstErrors = response.data.guest;
+	// 			if( Object.keys(transactionErrors).length > 0 )
+	// 				messagevalidation(transactionErrors);
+	// 			if( Object.keys(annErrors).length > 0 )
+	// 				messagevalidation(annErrors);
+	// 			if( Object.keys(annetteErrors).length > 0 )
+	// 				messagevalidation(annetteErrors);
+	// 			if( Object.keys(guestErrors).length > 0 )
+	// 				messagevalidation(guestErrors);
+	// 		}else{
+	// 			alert("Rotarians are registered successfully!.");
+	// 			window.location.reload();
+	// 			$('.loading').css("display","none");
+	// 			$('body').removeClass("disabled blur");
+	// 		}
+	// 	}
+	// });
 });
 
 function messagevalidation(data){
-	$.each(data,function(finder,error){
-		
+	$.each(data,function(finder,error){		
 		$('[name="'+finder+'"]').closest('.form-group').append("<span class='error'>"+error+"</span>");
 	})
-
 }
 function clearErrors() {
 	$(".error").remove();
