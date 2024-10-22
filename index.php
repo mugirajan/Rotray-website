@@ -15,10 +15,11 @@
 		<title>Registration form - Shubha Mangalam - The Finale</title>
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script> 
-
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.css" rel="stylesheet"/>
 	    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js"></script>
 	    <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.full.js"></script>
+
 	    <script src="script.js"></script>
 	</head>
 	<style type="text/css">
@@ -216,6 +217,7 @@
 											<th scope="col">Food Preference</th>
 											<th scope="col">Partner</th>
 											<th scope="col">Annette</th>
+											<th scope="col">Actions</th>
 								    	</tr>
 								  	</thead>
 								  	<tbody>
@@ -237,14 +239,14 @@
 								      		<th scope="col">Call Name</th>
 								      		<th scope="col">Mobile</th>
 											<th scope="col">Food Preference</th>
+											<th scope="col">Action</th>
 								    	</tr>
 								  	</thead>
 								  	<tbody>
 									    
 								  	</tbody>
 								</table>
-								<button type="button" class="btn btn-info" id="add-guest" style="margin-bottom:1rem;float: right;">Add</button>
-								
+								<button type="button" class="btn btn-info" id="add-guest" style="margin-bottom:1rem;float: right;">Add Guest</button>
 						  	</div>
 						  	<div class="tab-pane fade" id="ann" role="tabpanel" aria-labelledby="profile-tab">
 						  		
@@ -285,7 +287,7 @@
 						</div>
 					</div>
 				</div>
-				<div style="padding-left: 3.5%;padding-right: 3.5%">
+				<div  class="d-none" style="padding-left: 3.5%;padding-right: 3.5%">
 					<table class="table table-bordered table-hover" id="paymentTable">
 						<thead>
 							<tr>
@@ -307,7 +309,7 @@
 						</tbody>
 					</table>
 				</div>
-				<div style="text-align: center;padding-left: 3.5%;padding-right: 3.5%">
+				<div class="d-none" style="text-align: center;padding-left: 3.5%;padding-right: 3.5%">
 					<h5>Payment to be made in the form of Cheque / DD / NEFT / RTGS to</h5>
 					<h5>A Sridharan - HDFC BANK - A/C.NO. 01411000069004, IFSC - HDFC0000141</h4>
 						<hr>
@@ -426,25 +428,26 @@
 		}
 		
 		function getRotarianHTML(count) {
-    				rotarianRowHtml = "<tr>\
-                        <th scope='row'>"+count+"</th>\
-                        <td>\
-                            <select style='width: 100%' name ='rotarianSearch[]' id='rotarianSearch_"+count+"' class='rotarianSearch form-select'>"+optionsHTML+"</select>\
-                        </td>\
-                        <td><input type='text' class='form-control textBox' name='rotarian_call_name[]' id='rotarian_call_name"+count+"'></td>\
-                        <td><input type='text' class='form-control textBox rotarian_mobile' name='rotarian_mobile[]' id='rotarian_mobile"+count+"'></td>\
-                        <td><select class='form-select' name='food_preference[]' id='food_preference_"+count+"'>\
-                                <option value=''>Select Food Preference</option>\
-                                <option value='Veg'>Veg</option>\
-                                <option value='Non Veg'>Non Veg</option>\
-                                <option value='Sat Veg Sunday Non Veg'>Sat Veg & Sunday Non Veg</option>\
-                            </select>\
-                        </td>\
-						<td><input type='button' value='add' class='add-partner-btn'></td>\
-						<td><input type='button' value='add' class='add-annette-btn'></td>\
-                       </tr>";
-			return rotarianRowHtml;
-		}
+    rotarianRowHtml = "<tr>\
+        <th scope='row'>"+count+"</th>\
+        <td>\
+            <select style='width: 100%' name ='rotarianSearch[]' id='rotarianSearch_"+count+"' class='rotarianSearch form-select'>"+optionsHTML+"</select>\
+        </td>\
+        <td><input type='text' class='form-control textBox' name='rotarian_call_name[]' id='rotarian_call_name"+count+"'></td>\
+        <td><input type='text' class='form-control textBox rotarian_mobile' name='rotarian_mobile[]' id='rotarian_mobile"+count+"'></td>\
+        <td><select class='form-select' name='food_preference[]' id='food_preference_"+count+"'>\
+                <option value=''>Select Food Preference</option>\
+                <option value='Veg'>Veg</option>\
+                <option value='Non Veg'>Non Veg</option>\
+                <option value='Sat Veg Sunday Non Veg'>Sat Veg & Sunday Non Veg</option>\
+            </select>\
+        </td>\
+        <td><button type='button' class='btn btn-success add-partner-btn'><i class='fa fa-plus'></i></button></td>\
+        <td><button type='button'  class='btn btn-primary add-annette-btn'><i class='fa fa-plus'></i></button></td>\
+        <td class='d-flex'><button type='button' class='delete-rotarian btn btn-danger'><i class='fa fa-trash'></i></button><button type='button' class='reset-rotarian btn btn-secondary'><i class='fa fa-refresh'></i></button></td>\
+    </tr>";
+    return rotarianRowHtml;
+}
 
 		function getAnnHTML(count) {
 			annRowHtml = "<tr class='partner-fields'>\
@@ -457,7 +460,11 @@
 					<option value='Veg'>Veg</option>\
 					<option value='Non Veg'>Non Veg</option>\
 					<option value='Sat Veg Sunday Non Veg'>Sat Veg & Sunday Non Veg</option>\
-					</select></td>";
+					</select></td>\
+					<td></td>\
+					<td></td>\
+					<td class='d-flex'><button type='button' class='delete-ann btn btn-danger'><i class='fa fa-trash'></i></button><button type='button' class='reset-ann btn btn-secondary'><i class='fa fa-refresh'></i></button></td>\
+				";
 			return annRowHtml;
 		}
 		
@@ -475,6 +482,9 @@
 									<option value='Non Veg'>Non Veg</option>\
 									<option value='Sat Veg Sunday Non Veg'>Sat Veg & Sunday Non Veg</option>\
 									</select></td>\
+									<td></td>\
+									<td></td>\
+									<td class='d-flex'><button type='button' class='delete-annette btn btn-danger'><i class='fa fa-trash'></i></button><button type='button' class='reset-annette btn btn-secondary'><i class='fa fa-refresh'></i></button></td>\
 								</tr>";
 			return rotarianRowHtml;
 		}
@@ -492,6 +502,7 @@
 					<option value='Non Veg'>Non Veg</option>\
 					<option value='Sat Veg Sunday Non Veg'>Sat Veg & Sunday Non Veg</option>\
 				</select></td>\
+				<td class='d-flex'><button type='button' class='btn btn-danger delete-guest' style='margin-bottom:1rem;float: right;'><i class='fa fa-trash'></i></button><button type='button' class='btn btn-secondary reset-guest' style='margin-bottom:1rem;float: right;'><i class='fa fa-refresh'></i></button></td>\
 			</tr>";
 			return rotarianRowHtml;
 		}
@@ -567,6 +578,7 @@
 
 		});
 
+		//add rotrain
 		$("#add-rotrain").click(function() {
 			var rotarianTableElement = $("#rotarianTable");
 			var rowCount = rotarianTableElement.find('tbody tr').length + 1; 
@@ -578,6 +590,31 @@
 			resetRotarian();
 		});
 
+		//delete rotrain
+		$("#rotarianTable").on("click", ".delete-rotarian", function () {
+			var row = $(this).closest("tr");
+			row.remove();
+
+			var rows = $("#rotarianTable tbody tr");
+			rows.each(function (index, value) {
+				$(value).find("th:first-child").text(index + 1);
+			});
+
+			rotarianRow = rows.length;
+
+			calculateMemberRegistrationFee();
+		});
+
+		//reset rotrain
+		$("#rotarianTable").on("click", ".reset-rotarian", function () {
+			var row = $(this).closest("tr");
+			
+			row.find(".rotarianSearch").select2("val", "");
+			
+			row.find("input[type='text']").val("");
+		});
+
+		//add guest
 		$("#add-guest").click(function () {
 			var guestTableElement = $("#guestTable");
 			var currentRowCount = $("#guestTable tbody tr").length + 1;
@@ -586,7 +623,31 @@
 			resetRotarian();
 		});
 
+		//delete guest
+		$("#guestTable").on("click", ".delete-guest", function () {
+			var row = $(this).closest("tr");
+			row.remove();
 
+			var rows = $("#guestTable tbody tr");
+			rows.each(function (index, value) {
+				$(value).find("td:first-child").text(index + 1);
+			});
+
+			calculateMemberRegistrationFee();
+
+			guestRow = rows.length;
+		});
+
+		//reset guest
+		$("#guestTable").on("click", ".reset-guest", function () {
+			var row = $(this).closest("tr");
+			
+			row.find("input[type='text']").val("");
+			
+			row.find("select").val("");
+		});
+
+		//add partner
 		$("#add-ann").click(function () {
 			var annTableElement = $("#annTable");
 			
@@ -597,6 +658,33 @@
 			resetRotarian();
 		});
 
+		//delete partner
+		$("#rotarianTable").on("click", ".delete-ann", function () {
+			console.log("Delete button clicked");
+			var row = $(this).closest("tr");
+
+			row.remove();
+
+			var rows = $("#rotarianTable tbody tr");
+			rows.each(function (index, value) {
+				$(value).find("td:first-child").text(index + 1);
+			});
+
+			calculateMemberRegistrationFee();
+
+			annRow = rows.length;
+		});
+
+		//reset partner
+		$("#rotarianTable").on("click", ".reset-ann", function () {
+			var row = $(this).closest("tr");
+			
+			row.find("input[type='text']").val("");
+			
+			row.find("select").val("");
+		});
+
+		//add annette
 		$("#add-annette").click(function () {
 			var annetteTableElement = $("#annetteTable");
 			
@@ -607,6 +695,31 @@
 			
 			resetRotarian();
 		});
+
+		//delete annette
+		$("#rotarianTable").on("click", ".delete-annette", function () {
+			var row = $(this).closest("tr");
+			row.remove();
+
+			var rows = $("#rotarianTable tbody tr");
+			rows.each(function (index, value) {
+				$(value).find("td:first-child").text(index + 1);
+			});
+
+			calculateMemberRegistrationFee();
+
+			annetteRow = rows.length;
+		});
+
+		//reset annette
+		$("#rotarianTable").on("click", ".reset-annette", function () {
+			var row = $(this).closest("tr");
+			
+			row.find("input[type='text']").val("");
+			
+			row.find("select").val("");
+		});
+		
 
 		$("#login").click(function(e){
 			window.location.href = "admin/";
@@ -633,6 +746,8 @@
 		        });
 		}
 		});
+
+		
 		
 	</script>
 	<script src="script.js"></script>

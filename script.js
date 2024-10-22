@@ -204,4 +204,12 @@ $(document).on("click", ".add-partner-btn", function() {
   });
 
 
+  document.getElementById('add-guest').addEventListener('click', addGuestRow);
 
+  // Event listener for delete guest button
+  document.addEventListener('click', (e) => {
+	  if (e.target.classList.contains('delete-guest')) {
+		  e.target.parentNode.parentNode.remove();
+		  guestRow--;
+	  }
+  });

@@ -98,8 +98,6 @@
 		if (isset($formData['rotarianSearch'])) {
 			foreach($formData['rotarianSearch'] as $rotarian){
 				if($rotarian != ""){
-					// file_put_contents($ff, print_r("Data:".PHP_EOL, true), FILE_APPEND | LOCK_EX );
-					// file_put_contents($ff, print_r($rotarian, true), FILE_APPEND | LOCK_EX);
 					$rotarian_sum += 1500;
 				}
 			}
