@@ -87,7 +87,7 @@
 				"rotarianSearch" => "string",
 				"rotarian_mobile" => "string"
 			];
-			$questValidationRule = [
+			$guestValidationRule = [
 				"guest_name" => "string",
 				"guest_call_name" =>"string"
 			];
@@ -104,7 +104,7 @@
 				"transactionRef" => $formData['transactionRef'],
 				"transactionDate" => date("Y-m-d"),
 				"totalAmount" => $formData['totalAmount'],
-				"registerer_club" => $formData['registerer_club'],
+				// "registerer_club" => $formData['registerer_club'],
 				"registerer_name" => $formData['registerer_name'],
 				"registerer_email" => $formData['registerer_email'],
 				"registerer_mobile" => $formData['registerer_mobile'],
@@ -153,11 +153,11 @@
 			}
 
 			for ($i=0; $i < count($formData['guest_name']); $i++) { 
-				$annDetails[] = [
-					"ann_name" =>$formData['guest_name'][$i],
-					"ann_call_name"=> $formData['guest_call_name'][$i],
+				$guestDetails[] = [
+					"guest_name" =>$formData['guest_name'][$i],
+					"guest_call_name"=> $formData['guest_call_name'][$i],
 					"foodPrefrence"=> $formData['guest_checkVeg'][$i],
-					"ann_mobile"=> $formData['guest_mobile'][$i],
+					"guest_mobile"=> $formData['guest_mobile'][$i],
 					"member_type" => 4,
 					"fktransaction_id"=>$transactionRecord['id']
 				];
@@ -188,6 +188,7 @@
 			insertRotariansDetails($rotariansDetails);
 			insertAnnDetails($annDetails);
 			insertAnnetteDetails($annetteDetails);
+			insertGuestDetails($guestDetails);
 			
 			return array("error" => 0,"message"=> "Rotarians are register successfully!.", "data" => []);
 		} catch (Exception $e) {

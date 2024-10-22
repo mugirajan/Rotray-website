@@ -224,7 +224,7 @@
 
 								</table>
 
-								<button type= "button" class="btn btn-info" id="add-rotrain" style="float: right;">Add</button>
+								<button  type= "button" class="btn btn-info" id="add-rotrain" style="float: right;margin-bottom:1rem">Add</button>
 								
 							</div>
 							<div class="tab-pane fade" id="guest" role="tabpanel" aria-labelledby="guest-tab">
@@ -243,7 +243,7 @@
 									    
 								  	</tbody>
 								</table>
-								<button type="button" class="btn btn-info" id="add-guest" style="float: right;">Add</button>
+								<button type="button" class="btn btn-info" id="add-guest" style="margin-bottom:1rem;float: right;">Add</button>
 								
 						  	</div>
 						  	<div class="tab-pane fade" id="ann" role="tabpanel" aria-labelledby="profile-tab">
@@ -291,8 +291,9 @@
 							<tr>
 								<th scope="col">Category</th>
 								<th scope="col">Rotarian</th>
-								<th scope="col">Ann</th>
-								<th scope="col">Name Not Listed</th>
+								<th scope="col">Partner</th>
+								<th scope="col">Annette</th>
+								<th scope="col">Guest</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -301,6 +302,7 @@
 								<td id="rotarianTotal">1500</td>
 								<td id="annTotal">1500</td>
 								<td id="annetteTotal">1500</td>
+								<td id="guestTotal">1500</td>
 							</tr>
 						</tbody>
 					</table>
@@ -414,9 +416,10 @@
 				},
 				success:function(res){
 					var response = JSON.parse(res);
-					/*$("#rotarianTotal").html(response.rotarian);				
+					$("#rotarianTotal").html(response.rotarian);				
 					$("#annTotal").html(response.ann);				
-					$("#annetteTotal").html(response.annette);*/
+					$("#annetteTotal").html(response.annette);
+					$("#guestTotal").html(response.guest);
 					$("#totalAmount").val(response.total);				
 				}
 			});
@@ -523,6 +526,9 @@
 				calculateMemberRegistrationFee();
 			});	
 			$(".annette_name").on("change",function(){
+				calculateMemberRegistrationFee();
+			});	
+			$(".guest_name").on("change",function(){
 				calculateMemberRegistrationFee();
 			});	
 

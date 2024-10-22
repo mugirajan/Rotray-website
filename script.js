@@ -153,6 +153,7 @@ $("#rotarianRegister").on("submit",function(e){
 				var rotarianErrors = response.data.rotarian;
 				var annErrors = response.data.ann;
 				var annetteErrors = response.data.annette;
+				var guesstErrors = response.data.guest;
 				if( Object.keys(transactionErrors).length > 0 )
 					messagevalidation(transactionErrors);
 
@@ -161,6 +162,9 @@ $("#rotarianRegister").on("submit",function(e){
 
 				if( Object.keys(annetteErrors).length > 0 )
 					messagevalidation(annetteErrors);
+
+				if( Object.keys(guestErrors).length > 0 )
+					messagevalidation(guestErrors);
 
 						
 				

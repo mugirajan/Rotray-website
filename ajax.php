@@ -82,35 +82,57 @@
 	function calculateMemberFees($data)
 	{
 		$formData = formDataArrange($data);
+
 		$rotarian_sum = 0;
 		$ann_sum = 0;
 		$annette_sum = 0;
-		$guest_sum = 0; // Initialize guest sum
+		$guest_sum = 0;
 
-		foreach($formData['rotarianSearch[]'] as $rotarian){
-			if($rotarian != ""){
-				$rotarian_sum += 1500;
-			}
-		}
-		foreach($formData['ann_name[]'] as $ann){
-			if($ann != ""){
-				$ann_sum += 1500;
-			}
-		}
-		foreach($formData['annette_name[]'] as $annette){
-			if($annette != ""){
-				$annette_sum += 1500;
-			}
-		}
-		foreach($formData['guest_name[]'] as $guest){ 
-			if($guest != ""){
-				$guest_sum += 1500; 
-			}
-		}
-		$total = $rotarian_sum + $ann_sum + $annette_sum + $guest_sum; // Include guest total
 
-		return array("rotarian" => $rotarian_sum,"ann" => $ann_sum,"annette" => $annette_sum,"guest" => $guest_sum, "total" => $total);
+		if (isset($formData['rotarianSearch[]']) && is_array($formData['rotarianSearch[]'])) {
+			foreach($formData['rotarianSearch[]'] as $rotarian){
+				if($rotarian != ""){
+					$rotarian_sum += 1500;
+				}
+			}
+		}
+
+		if (isset($formData['ann_name[]']) && is_array($formData['ann_name[]'])) {
+			foreach($formData['ann_name[]'] as $ann){
+				if($ann != ""){
+					$ann_sum += 1500;
+				}
+			}
+		}
+
+		if (isset($formData['annette_name[]']) && is_array($formData['annette_name[]'])) {
+			foreach($formData['annette_name[]'] as $annette){
+				if($annette != ""){
+					$annette_sum += 1500;
+				}
+			}
+		}
+
+		if (isset($formData['guest_name[]']) && is_array($formData['guest_name[]'])) {
+			foreach($formData['guest_name[]'] as $guest){ 
+				if($guest != ""){
+					$guest_sum += 1500; 
+				}
+			}
+		}
+
+
+		$total = $rotarian_sum + $ann_sum + $annette_sum + $guest_sum;
+
+		return array(
+			"rotarian" => $rotarian_sum,
+			"ann" => $ann_sum,
+			"annette" => $annette_sum,
+			"guest" => $guest_sum,
+			"total" => $total
+		);
 	}
+
 
 	function formDataArrange($data){
 		$formData = [];
