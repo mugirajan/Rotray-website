@@ -428,26 +428,26 @@
 		}
 		
 		function getRotarianHTML(count) {
-    rotarianRowHtml = "<tr>\
-        <th scope='row'>"+count+"</th>\
-        <td>\
-            <select  name ='rotarianSearch[]' id='rotarianSearch_"+count+"' class='rotarianSearch form-select'>"+optionsHTML+"</select>\
-        </td>\
-        <td><input type='text' class='form-control textBox' name='rotarian_call_name[]' id='rotarian_call_name"+count+"'></td>\
-        <td><input type='text' class='form-control textBox rotarian_mobile' name='rotarian_mobile[]' id='rotarian_mobile"+count+"'></td>\
-        <td><select class='form-select' name='food_preference[]' id='food_preference_"+count+"'>\
-                <option value=''>Select Food Preference</option>\
-                <option value='Veg'>Veg</option>\
-                <option value='Non Veg'>Non Veg</option>\
-                <option value='Sat Veg Sunday Non Veg'>Sat Veg & Sunday Non Veg</option>\
-            </select>\
-        </td>\
-        <td><button type='button' class='btn btn-success add-partner-btn'><i class='fa fa-plus'></i></button></td>\
-        <td><button type='button'  class='btn btn-primary add-annette-btn'><i class='fa fa-plus'></i></button></td>\
-        <td class='d-flex'><button type='button' class='delete-rotarian btn btn-danger'><i class='fa fa-trash'></i></button><button type='button' class='reset-rotarian btn btn-secondary'><i class='fa fa-refresh'></i></button></td>\
-    </tr>";
-    return rotarianRowHtml;
-}
+			rotarianRowHtml = "<tr>\
+				<th scope='row'>"+count+"</th>\
+				<td>\
+					<select  name ='rotarianSearch[]' id='rotarianSearch_"+count+"' class='rotarianSearch form-select'>"+optionsHTML+"</select>\
+				</td>\
+				<td><input type='text' class='form-control textBox' name='rotarian_call_name[]' id='rotarian_call_name"+count+"'></td>\
+				<td><input type='text' class='form-control textBox rotarian_mobile' name='rotarian_mobile[]' id='rotarian_mobile"+count+"'></td>\
+				<td><select class='form-select' name='food_preference[]' id='food_preference_"+count+"'>\
+						<option value=''>Select Food Preference</option>\
+						<option value='Veg'>Veg</option>\
+						<option value='Non Veg'>Non Veg</option>\
+						<option value='Sat Veg Sunday Non Veg'>Sat Veg & Sunday Non Veg</option>\
+					</select>\
+				</td>\
+				<td><button type='button' class='btn btn-success add-partner-btn'><i class='fa fa-plus'></i></button></td>\
+				<td><button type='button'  class='btn btn-primary add-annette-btn'><i class='fa fa-plus'></i></button></td>\
+				<td class='d-flex'><button type='button' class='delete-rotarian btn btn-danger'><i class='fa fa-trash'></i></button><button type='button' class='reset-rotarian btn btn-secondary'><i class='fa fa-refresh'></i></button></td>\
+			</tr>";
+			return rotarianRowHtml;
+		}
 
 		function getAnnHTML(count) {
 			annRowHtml = "<tr class='partner-fields'>\
@@ -474,7 +474,7 @@
 									<td>\
 										<input type='text' class='form-control textBox annette_name' name='annette_name[]' id='annette_name_"+count+"' placeholder='Annette Name'>\
 									</td>\
-									<td><input type='text' class='form-control textBox annette_call_name' name='annette_call_name[]'id='annette_call_name_"+count+"' placeholder='Annette Call Name'></td>\
+									<td><input type='text' class='form-control textBox annette_call_name' name='annette_call_name[]' id='annette_call_name_"+count+"' placeholder='Annette Call Name'></td>\
 									<td><input type='text' class='form-control textBox' name='annette_mobile[]'id='annette_mobile"+count+"' placeholder='Annette Mobile'></td>\
 									<td><select class='form-select' name='annette_food_preference[]' id='ann_food_preference"+count+"'>\
 									<option value=''>Select Food Preference</option>\
@@ -555,7 +555,7 @@
 		
 		$(document).ready(function() {
 			var rotarianTableElement = $("#rotarianTable");
-			var guestTableElement = $("guestTable");
+			var guestTableElement = $("#guestTable");
 			var annTableElement = $("#annTable");
 			var annetteTableElement = $("#annetteTable");
 			

@@ -3,24 +3,17 @@
 	include('validation.php');
 	session_start();
 	function message($message) {
-	    // Set the file path for the log file
 	    $logFile = 'log/error.log';
-
-	    // Get the current date/time
 	    $timestamp = date('Y-m-d H:i:s');
 
 	    // Construct the log entry
 	    $logEntry = "[$timestamp] $message\n";
 
-	    // Open the log file in append mode or create it if it doesn't exist
 	    if ($file = fopen($logFile, 'a')) {
-	        // Write the log entry to the file
 	        fwrite($file, $logEntry);
-	        fclose($file); // Close the file handle
+	        fclose($file); 
 	    } else {
-	        // Handle errors if unable to open the file
 	        echo "Unable to open or create the log file.";
-	        // You might want to log this failure elsewhere or handle it according to your needs
 	    }
 	}
 

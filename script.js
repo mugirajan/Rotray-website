@@ -62,8 +62,9 @@ $("#select-all-rotarians").change(function() {
 						<option value='Sat Veg Sunday Non Veg'>Sat Veg & Sunday Non Veg</option>\
 						</select>\
 					</td>\
-					<td><input type='button' value='add' class='add-partner-btn'></td>\
-					<td><input type='button' value='add' class='add-annette-btn'></td>\
+					<td><button type='button' class='btn btn-success add-partner-btn'><i class='fa fa-plus'></i></button></td>\
+					<td><button type='button'  class='btn btn-primary add-annette-btn'><i class='fa fa-plus'></i></button></td>\
+					<td class='d-flex'><button type='button' class='delete-rotarian btn btn-danger'><i class='fa fa-trash'></i></button><button type='button' class='reset-rotarian btn btn-secondary'><i class='fa fa-refresh'></i></button></td>\
 					</tr>";
 					$('#rotarianTable tbody').append(rowHtml);
 					rowCount++;
@@ -204,12 +205,4 @@ $(document).on("click", ".add-partner-btn", function() {
   });
 
 
-  document.getElementById('add-guest').addEventListener('click', addGuestRow);
-
-  // Event listener for delete guest button
-  document.addEventListener('click', (e) => {
-	  if (e.target.classList.contains('delete-guest')) {
-		  e.target.parentNode.parentNode.remove();
-		  guestRow--;
-	  }
-  });
+ 

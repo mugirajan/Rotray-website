@@ -17,8 +17,6 @@
 			break;
 		case 'calculateMemberRegistrationFee':
 			file_put_contents($f, "SEssion unset", FILE_APPEND | LOCK_EX);
-			// file_put_contents($f, print_r("Data received :", true), FILE_APPEND | LOCK_EX);
-			// file_put_contents($f, print_r($getData['value'], true), FILE_APPEND | LOCK_EX);
 			echo json_encode(calculateMemberFees($getData['value']), FILE_APPEND | LOCK_EX);
 			break;
 		default:
@@ -103,7 +101,7 @@
 			}
 		}
 
-		if (isset($formData['ann_name[]']) && is_array($formData['ann_name[]'])) {
+		if (isset($formData['ann_name[]'])) {
 			foreach($formData['ann_name[]'] as $ann){
 				if($ann != ""){
 					$ann_sum += 1500;
@@ -111,7 +109,7 @@
 			}
 		}
 
-		if (isset($formData['annette_name[]']) && is_array($formData['annette_name[]'])) {
+		if (isset($formData['annette_name[]'])) {
 			foreach($formData['annette_name[]'] as $annette){
 				if($annette != ""){
 					$annette_sum += 1500;
@@ -119,7 +117,7 @@
 			}
 		}
 
-		if (isset($formData['guest_name[]']) && is_array($formData['guest_name[]'])) {
+		if (isset($formData['guest_name[]'])) {
 			foreach($formData['guest_name[]'] as $guest){ 
 				if($guest != ""){
 					$guest_sum += 1500; 
@@ -138,6 +136,8 @@
 			"total" => $total
 		);
 	}
+
+
 
 
 	function formDataArrange($data){
