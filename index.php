@@ -405,6 +405,10 @@
 			clearErrors();
 		});
 
+		$(document).on("change", ".rotarianSearch, .ann_name, .annette_name, .guest_name", function() {
+			calculateMemberRegistrationFee();
+		});
+		
 		function calculateMemberRegistrationFee(){
 			var data = $("form").serializeArray();
 			$.ajax({
