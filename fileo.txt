@@ -1,0 +1,178 @@
+Array
+(
+    [0] => Array
+        (
+            [ann_name] => manimekalai
+            [ann_call_name] => mani
+            [ann_food_preference] => Array
+                (
+                    [0] => Non Veg
+                    [1] => Non Veg
+                    [2] => 
+                )
+
+            [ann_mobile] => 09867
+            [member_type] => 2
+            [fktransaction_id] => 72
+        )
+
+    [1] => Array
+        (
+            [ann_name] => ajith
+            [ann_call_name] => mani
+            [ann_food_preference] => 
+            [ann_mobile] => kamal
+            [member_type] => 2
+            [fktransaction_id] => 72
+        )
+
+    [2] => Array
+        (
+            [ann_name] => 
+            [ann_call_name] => 
+            [ann_food_preference] => 
+            [ann_mobile] => 
+            [member_type] => 2
+            [fktransaction_id] => 72
+        )
+
+)
+Array
+(
+    [0] => Array
+        (
+            [ann_name] => ajith
+            [ann_call_name] => aji
+            [ann_food_preference] => Array
+                (
+                    [0] => Non Veg
+                    [1] => Non Veg
+                    [2] => 
+                )
+
+            [ann_mobile] => 09867
+            [member_type] => 2
+            [fktransaction_id] => 73
+        )
+
+    [1] => Array
+        (
+            [ann_name] => mugilavathi
+            [ann_call_name] => mani
+            [ann_food_preference] => 
+            [ann_mobile] => kamal
+            [member_type] => 2
+            [fktransaction_id] => 73
+        )
+
+    [2] => Array
+        (
+            [ann_name] => 
+            [ann_call_name] => 
+            [ann_food_preference] => 
+            [ann_mobile] => 
+            [member_type] => 2
+            [fktransaction_id] => 73
+        )
+
+)
+Array
+(
+    [0] => Array
+        (
+            [ann_name] => 
+            [ann_call_name] => 
+            [ann_food_preference] => 
+            [ann_mobile] => 
+            [member_type] => 2
+            [fktransaction_id] => 74
+        )
+
+)
+Array
+(
+    [0] => Array
+        (
+            [ann_name] => 
+            [ann_call_name] => 
+            [ann_food_preference] => 
+            [ann_mobile] => 
+            [member_type] => 2
+            [fktransaction_id] => 75
+        )
+
+)
+Array
+(
+    [0] => Array
+        (
+            [ann_name] => manimekalai
+            [ann_call_name] => ajith
+            [ann_food_preference] => Sat Veg Sunday Non Veg
+            [ann_mobile] => 09867
+            [member_type] => 2
+            [fktransaction_id] => 76
+        )
+
+    [1] => Array
+        (
+            [ann_name] => 
+            [ann_call_name] => 
+            [ann_food_preference] => 
+            [ann_mobile] => 
+            [member_type] => 2
+            [fktransaction_id] => 76
+        )
+
+)
+Array
+(
+    [0] => Array
+        (
+            [ann_name] => manimekalai
+            [ann_call_name] => ajith
+            [ann_food_preference] => Array
+                (
+                    [0] => Sat Veg Sunday Non Veg
+                    [1] => 
+                )
+
+            [ann_mobile] => 09867
+            [member_type] => 2
+            [fktransaction_id] => 77
+        )
+
+    [1] => Array
+        (
+            [ann_name] => 
+            [ann_call_name] => 
+            [ann_food_preference] => 
+            [ann_mobile] => 
+            [member_type] => 2
+            [fktransaction_id] => 77
+        )
+
+)
+Array
+(
+    [0] => Array
+        (
+            [ann_name] => ajay
+            [ann_call_name] => mugila
+            [ann_food_preference] => 
+            [ann_mobile] => 09867
+            [member_type] => 2
+            [fktransaction_id] => 78
+        )
+
+    [1] => Array
+        (
+            [ann_name] => 
+            [ann_call_name] => 
+            [ann_food_preference] => 
+            [ann_mobile] => 
+            [member_type] => 2
+            [fktransaction_id] => 78
+        )
+
+)

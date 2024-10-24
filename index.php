@@ -408,7 +408,7 @@
 		$(document).on("change", ".rotarianSearch, .ann_name, .annette_name, .guest_name", function() {
 			calculateMemberRegistrationFee();
 		});
-		
+
 		function calculateMemberRegistrationFee(){
 			var data = $("form").serializeArray();
 			$.ajax({
@@ -439,7 +439,7 @@
 				</td>\
 				<td><input type='text' class='form-control textBox' name='rotarian_call_name[]' id='rotarian_call_name"+count+"'></td>\
 				<td><input type='text' class='form-control textBox rotarian_mobile' name='rotarian_mobile[]' id='rotarian_mobile"+count+"'></td>\
-				<td><select class='form-select' name='food_preference[]' id='food_preference_"+count+"'>\
+				<td><select class='form-select' name='food_preference[]' id='food_preference"+count+"'>\
 						<option value=''>Select Food Preference</option>\
 						<option value='Veg'>Veg</option>\
 						<option value='Non Veg'>Non Veg</option>\
@@ -480,7 +480,7 @@
 									</td>\
 									<td><input type='text' class='form-control textBox annette_call_name' name='annette_call_name[]' id='annette_call_name_"+count+"' placeholder='Annette Call Name'></td>\
 									<td><input type='text' class='form-control textBox' name='annette_mobile[]'id='annette_mobile"+count+"' placeholder='Annette Mobile'></td>\
-									<td><select class='form-select' name='annette_food_preference[]' id='ann_food_preference"+count+"'>\
+									<td><select class='form-select' name='annette_food_preference[]' id='annette_food_preference"+count+"'>\
 									<option value=''>Select Food Preference</option>\
 									<option value='Veg'>Veg</option>\
 									<option value='Non Veg'>Non Veg</option>\

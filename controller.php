@@ -1,4 +1,5 @@
 <?php
+
 	include('models.php');
 	include('validation.php');
 	session_start();
@@ -134,49 +135,52 @@
 				$transactionRecord = insertTransactionDetails($transactionData);
 			}
 			
+			$f = "filee.txt";
+			file_put_contents($f, print_r($formData, true), FILE_APPEND | LOCK_EX);
+
 			for ($i=0; $i < count($formData['rotarianSearch']); $i++) { 
 				$rotariansDetails[] = [
 					"rotarianSearch" =>$formData['rotarianSearch'][$i],
 					"rotarian_call_name"=> $formData['rotarian_call_name'][$i],
-					"foodPrefrence"=> $formData['rotarian_checkVeg'][$i],
+					"food_preference"=> $formData['food_preference'][$i],
 					"rotarian_mobile"=>$formData['rotarian_mobile'][$i],
 					"member_type" => 1,
 					"fktransaction_id"=>$transactionRecord['id']
 				];
 			}
 
-			for ($i=0; $i < count($formData['guest_name']); $i++) { 
-				$guestDetails[] = [
-					"guest_name" =>$formData['guest_name'][$i],
-					"guest_call_name"=> $formData['guest_call_name'][$i],
-					"foodPrefrence"=> $formData['guest_checkVeg'][$i],
-					"guest_mobile"=> $formData['guest_mobile'][$i],
-					"member_type" => 4,
-					"fktransaction_id"=>$transactionRecord['id']
-				];
-			}
-
-			for ($i=0; $i < count($formData['ann_name']); $i++) { 
+			for ($i = 0; $i < count($formData['ann_name']); $i++) {
 				$annDetails[] = [
-					"ann_name" =>$formData['ann_name'][$i],
-					"ann_call_name"=> $formData['ann_call_name'][$i],
-					"foodPrefrence"=> $formData['ann_checkVeg'][$i],
-					"ann_mobile"=> $formData['ann_mobile'][$i],
+					"ann_name" => $formData['ann_name'][$i],
+					"ann_call_name" => $formData['ann_call_name'][$i],
+					"ann_food_preference" => isset($formData['ann_food_preference'][$i]) ? $formData['ann_food_preference'][$i] : '',
+					"ann_mobile" => $formData['ann_mobile'][$i],
 					"member_type" => 2,
-					"fktransaction_id"=>$transactionRecord['id']
+					"fktransaction_id" => $transactionRecord['id']
 				];
 			}
-
-			for ($i=0; $i < count($formData['annette_name']); $i++) { 
+			
+			for ($i = 0; $i < count($formData['annette_name']); $i++) {
 				$annetteDetails[] = [
-					"annette_name" =>$formData['annette_name'][$i],
-					"annette_call_name"=> $formData['annette_call_name'][$i],
-					"foodPrefrence"=> $formData['annette_checkVeg'][$i],
-					"annette_mobile"=> $formData['annette_mobile'][$i],
+					"annette_name" => $formData['annette_name'][$i],
+					"annette_call_name" => $formData['annette_call_name'][$i],
+					"annette_food_preference" => isset($formData['annette_food_preference'][$i]) ? $formData['annette_food_preference'][$i] : '',
+					"annette_mobile" => $formData['annette_mobile'][$i],
 					"member_type" => 3,
-					"fktransaction_id"=>$transactionRecord['id']
+					"fktransaction_id" => $transactionRecord['id']
 				];
-			}			
+			}
+			
+			for ($i = 0; $i < count($formData['guest_name']); $i++) {
+				$guestDetails[] = [
+					"guest_name" => $formData['guest_name'][$i],
+					"guest_call_name" => $formData['guest_call_name'][$i],
+					"guest_food_preference" => isset($formData['guest_food_preference'][$i]) ? $formData['guest_food_preference'][$i] : '',
+					"guest_mobile" => $formData['guest_mobile'][$i],
+					"member_type" => 4,
+					"fktransaction_id" => $transactionRecord['id']
+				];
+			}
 
 			insertRotariansDetails($rotariansDetails);
 			insertAnnDetails($annDetails);

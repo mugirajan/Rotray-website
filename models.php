@@ -63,7 +63,9 @@ function insertRotariansDetails($data)
 {
     foreach ($data as $row) {
         if($row['rotarianSearch'] != "") {
-            $sql = "INSERT INTO register_event (name, call_name, type, mobile, fktransaction_id) VALUES ('".$row['rotarianSearch']."', '".$row['rotarian_call_name']."', 1, '".$row['rotarian_mobile']."', ".$row['fktransaction_id'].")";
+            $food_preference = is_array($row['food_preference']) ? implode(',', $row['food_preference']) : $row['food_preference'];
+            
+            $sql = "INSERT INTO register_event (name, call_name, type, food_preference, mobile, fktransaction_id) VALUES ('".$row['rotarianSearch']."', '".$row['rotarian_call_name']."', 1, '".$food_preference."', '".$row['rotarian_mobile']."', ".$row['fktransaction_id'].")";
             
             if ($GLOBALS['conn']->query($sql) !== TRUE) {
                 message("Error: " . $sql . "<br>" . $GLOBALS['conn']->error);
@@ -71,6 +73,7 @@ function insertRotariansDetails($data)
         }
     }
 }
+
 
 function insertTransactionDetails($data)
 {
@@ -86,9 +89,12 @@ function insertTransactionDetails($data)
 
 function insertAnnDetails($data)
 {
+    $ff = "fileo.txt";
+    file_put_contents($ff, print_r($data, true), FILE_APPEND | LOCK_EX);
     foreach ($data as $row) {
         if($row['ann_name'] != "") {
-            $sql = "INSERT INTO register_event (name, call_name, type, food_preference, mobile, fktransaction_id) VALUES ('".$row['ann_name']."', '".$row['ann_call_name']."', 2, {$row['foodPrefrence']}, '".$row['ann_mobile']."', ".$row['fktransaction_id'].")";
+            $food_preference = is_array($row['ann_food_preference']) ? implode(',', $row['ann_food_preference']) : $row['ann_food_preference'];
+            $sql = "INSERT INTO register_event (name, call_name, type, food_preference, mobile, fktransaction_id) VALUES ('".$row['ann_name']."', '".$row['ann_call_name']."', 2, '".$food_preference."', '".$row['ann_mobile']."', ".$row['fktransaction_id'].")";
             
             if ($GLOBALS['conn']->query($sql) !== TRUE) {
                 message("Error: " . $sql . "<br>" . $GLOBALS['conn']->error);
@@ -99,9 +105,12 @@ function insertAnnDetails($data)
 
 function insertAnnetteDetails($data)
 {
+
     foreach ($data as $row) {
         if($row['annette_name'] != "") {
-            $sql = "INSERT INTO register_event (name, call_name, type, food_preference, mobile, fktransaction_id) VALUES ('".$row['annette_name']."', '".$row['annette_call_name']."', 3, {$row['foodPrefrence']}, '".$row['annette_mobile']."', ".$row['fktransaction_id'].")";
+            $food_preference = is_array($row['annette_food_preference']) ? implode(',', $row['annette_food_preference']) : $row['annette_food_preference'];
+
+            $sql = "INSERT INTO register_event (name, call_name, type, food_preference, mobile, fktransaction_id) VALUES ('".$row['annette_name']."', '".$row['annette_call_name']."', 3, '".$food_preference."', '".$row['annette_mobile']."', ".$row['fktransaction_id'].")";
             
             if ($GLOBALS['conn']->query($sql) !== TRUE) {
                 message("Error: " . $sql . "<br>" . $GLOBALS['conn']->error);
@@ -110,12 +119,13 @@ function insertAnnetteDetails($data)
     }
 }
 
-// New function to insert guest details
 function insertGuestDetails($data)
 {
     foreach ($data as $row) {
         if($row['guest_name'] != "") {
-            $sql = "INSERT INTO register_event (name, call_name, type, food_preference, mobile, fktransaction_id) VALUES ('".$row['guest_name']."', '".$row['guest_call_name']."', 4, {$row['foodPrefrence']}, '".$row['guest_mobile']."', ".$row['fktransaction_id'].")";
+            $food_preference = is_array($row['guest_food_preference']) ? implode(',', $row['guest_food_preference']) : $row['guest_food_preference'];
+
+            $sql = "INSERT INTO register_event (name, call_name, type, food_preference, mobile, fktransaction_id) VALUES ('".$row['guest_name']."', '".$row['guest_call_name']."', 4, '".$food_preference."', '".$row['guest_mobile']."', ".$row['fktransaction_id'].")";
             
             if ($GLOBALS['conn']->query($sql) !== TRUE) {
                 message("Error: " . $sql . "<br>" . $GLOBALS['conn']->error);

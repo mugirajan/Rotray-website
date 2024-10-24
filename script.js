@@ -1,6 +1,6 @@
 var optionsHTML = "";
 
-// Original functionality (populating select options)
+
 $("#rotaryClubListSearch").change(function(){
 	var club = $(this).val();
 	
@@ -29,7 +29,7 @@ $("#rotaryClubListSearch").change(function(){
 	});
   });
   
-  // New functionality (populating table rows) when checkbox is checked
+  // select all rotarians
 $("#select-all-rotarians").change(function() {
 	if ($(this).is(':checked')) {
 		$("#rotaryClubListSearch").change(function(){
@@ -55,7 +55,7 @@ $("#select-all-rotarians").change(function() {
 					<td><input type='text' class='form-control' name='rotarian_call_name[]'></td>\
 					<td>" + value.mobile + "</td>\
 					<td>\
-						<select class='form-select' name='food_preference[]'>\
+						<select class='form-select' name='food_preference[] id='food_preference'>\
 						<option value=''>Select Food Preference</option>\
 						<option value='Veg'>Veg</option>\
 						<option value='Non Veg'>Non Veg</option>\
@@ -104,6 +104,7 @@ $("#select-all-rotarians").change(function() {
 	});
 });
 */
+
 $("#registerer_name").change(function(){
 
 				calculateMemberRegistrationFee();
@@ -139,40 +140,40 @@ $("#rotarianRegister").on("submit",function(e){
 
 		console.log("Submittd");
 	
-	// $.ajax({
-	// 	url:"ajax.php",
-	// 	method:"post",
-	// 	processData: false, // Prevent jQuery from processing the data
-    //     contentType: false,
-	// 	data:data,
-	// 	success:function(res){
-	// 		var response = JSON.parse(res);
-	// 		// console.log(response);
-	// 		$('.loading').css("display","none");
-	// 		$('body').removeClass("disabled blur");	
-	// 		if(response.error == 1) {
-	// 			clearErrors();
-	// 			var transactionErrors = response.data.transaction;
-	// 			var rotarianErrors = response.data.rotarian;
-	// 			var annErrors = response.data.ann;
-	// 			var annetteErrors = response.data.annette;
-	// 			var guesstErrors = response.data.guest;
-	// 			if( Object.keys(transactionErrors).length > 0 )
-	// 				messagevalidation(transactionErrors);
-	// 			if( Object.keys(annErrors).length > 0 )
-	// 				messagevalidation(annErrors);
-	// 			if( Object.keys(annetteErrors).length > 0 )
-	// 				messagevalidation(annetteErrors);
-	// 			if( Object.keys(guestErrors).length > 0 )
-	// 				messagevalidation(guestErrors);
-	// 		}else{
-	// 			alert("Rotarians are registered successfully!.");
-	// 			window.location.reload();
-	// 			$('.loading').css("display","none");
-	// 			$('body').removeClass("disabled blur");
-	// 		}
-	// 	}
-	// });
+	$.ajax({
+		url:"ajax.php",
+		method:"post",
+		processData: false, 
+        contentType: false,
+		data:data,
+		success:function(res){
+			var response = JSON.parse(res);
+			// console.log(response);
+			$('.loading').css("display","none");
+			$('body').removeClass("disabled blur");	
+			if(response.error == 1) {
+				clearErrors();
+				var transactionErrors = response.data.transaction;
+				var rotarianErrors = response.data.rotarian;
+				var annErrors = response.data.ann;
+				var annetteErrors = response.data.annette;
+				var guesstErrors = response.data.guest;
+				if( Object.keys(transactionErrors).length > 0 )
+					messagevalidation(transactionErrors);
+				if( Object.keys(annErrors).length > 0 )
+					messagevalidation(annErrors);
+				if( Object.keys(annetteErrors).length > 0 )
+					messagevalidation(annetteErrors);
+				if( Object.keys(guestErrors).length > 0 )
+					messagevalidation(guestErrors);
+			}else{
+				alert("Rotarians are registered successfully!.");
+				// window.location.reload();
+				$('.loading').css("display","none");
+				$('body').removeClass("disabled blur");
+			}
+		}
+	});
 });
 
 function messagevalidation(data){

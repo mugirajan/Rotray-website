@@ -34,53 +34,49 @@
 		return array("status"=>"success","data"=>$data);
 	}
 
-	function saveFormData($data, $getFormCal = false){
-		$formData = [];
-		foreach($data as $key => $value){
-			// if($key != 'rotaryClubListSearch'){
-				$index = $key;
-				if($key == 'receipt'){
-					$formData['receipt'] = $value;
+	function saveFormData($data, $getFormCal = false) {
+		$formData = array(
+			'food_preference' => array(),
+			'ann_food_preference' => array(),
+			'annette_food_preference' => array(),
+			'guest_food_preference' => array()
+		);
+	
+		foreach ($data as $key => $value) {
+			if ($key == 'receipt') {
+				$formData['receipt'] = $value;
+			} else {
+				if (strpos($key, 'guest_food_preference') !== false) {
+					$formData['guest_food_preference'][] = $value;
+				} elseif (strpos($key, 'ann_food_preference') !== false) {
+					$formData['ann_food_preference'][] = $value;
+				} elseif (strpos($key, 'annette_food_preference') !== false) {
+					$formData['annette_food_preference'][] = $value;
+				} elseif (strpos($key, 'food_preference') !== false) {
+					$formData['food_preference'][] = $value;
+				} else {
+					$f = "filee.txt";
+					// file_put_contents($f, print_r("InElse", true), FILE_APPEND | LOCK_EX);
+					file_put_contents($f, print_r($key, true), FILE_APPEND | LOCK_EX);
+					file_put_contents($f, print_r(PHP_EOL, true), FILE_APPEND | LOCK_EX);
+					file_put_contents($f, print_r($value, true), FILE_APPEND | LOCK_EX);
+					file_put_contents($f, print_r(PHP_EOL, true), FILE_APPEND | LOCK_EX);
+					$formData[$key] = $value;
 				}
-				if(isset($formData[$index])){
-					if(strpos($index, "rotarian_checkVeg") !== false){
-						$formData["rotarian_checkVeg"][] = $value;
-					}elseif(strpos($index, "ann_checkVeg") !== false){
-						$formData["ann_checkVeg"][] = $value;
-					}elseif(strpos($index, "annette_checkVeg") !== false){
-						$formData["annette_checkVeg"][] = $value;
-					}elseif(strpos($index, "guest_checkVeg") !== false){ // New case for guests
-						$formData["guest_checkVeg"][] = $value;
-					}else{
-						$formData[$index] = $value;
-					}
-				}else{
-					if(strpos($index, "rotarian_checkVeg") !== false){
-						$formData["rotarian_checkVeg"][] = $value;
-					}elseif(strpos($index, "ann_checkVeg") !== false){
-						$formData["ann_checkVeg"][] = $value;
-					}elseif(strpos($index, "annette_checkVeg") !== false){
-						$formData["annette_checkVeg"][] = $value;
-					}elseif(strpos($index, "guest_checkVeg") !== false){ // New case for guests
-						$formData["guest_checkVeg"][] = $value;
-					}else{
-						$formData[$index] = $value;
-					}
-				}
-			// }
+			}
 		}
-		if($getFormCal){
+	
+		if ($getFormCal) {
 			return $formData;
 		}
+	
 		$result = formatAndInsertData($formData, $_FILES['receipt']);
-		if($result["error"] == 1){
-		    return $result;
-		}else{
+		if ($result["error"] == 1) {
+			return $result;
+		} else {
 			return $result;
 		}
-		// return array("status"=>"success","message"=>"Data updated successfully","data"=>$result);
 	}
-
 	function calculateMemberFees($data)
 	{
 		$ff = "file.txt";
@@ -148,28 +144,28 @@
 			if($form['name'] != 'rotaryClubListSearch'){
 				$index = $form['name'];
 				if(isset($formData[$index])){
-					if(strpos($index, "rotarian_checkVeg") !== false){
-						$formData["rotarian_checkVeg"][] = $form['value'];
-					}elseif(strpos($index, "ann_checkVeg") !== false){
-						$formData["ann_checkVeg"][] = $form['value'];
-					}elseif(strpos($index, "annette_checkVeg") !== false){
-						$formData["annette_checkVeg"][] = $form['value'];
-					}elseif(strpos($index, "guest_checkVeg") !== false){ // Handle guests
-						$formData["guest_checkVeg"][] = $form['value'];
+					if(strpos($index, "food_preference") !== false){
+						$formData["food_preference"][] = $form['value'];
+					}elseif(strpos($index, "ann_food_preference") !== false){
+						$formData["ann_food_preference"][] = $form['value'];
+					}elseif(strpos($index, "annette_food_preference") !== false){
+						$formData["annette_food_preference"][] = $form['value'];
+					}elseif(strpos($index, "guest_food_preference") !== false){ // Handle guests
+						$formData["guest_food_preference"][] = $form['value'];
 					}elseif(strpos($index, "rotarianSearch") !== false){
 						$formData["rotarianSearch"][] = $form['value'];
 					}else{
 						$formData[$index][] = $form['value'];
 					}
 				}else{
-					if(strpos($index, "rotarian_checkVeg") !== false){
-						$formData["rotarian_checkVeg"][] = $form['value'];
-					}elseif(strpos($index, "ann_checkVeg") !== false){
-						$formData["ann_checkVeg"][] = $form['value'];
-					}elseif(strpos($index, "annette_checkVeg") !== false){
-						$formData["annette_checkVeg"][] = $form['value'];
-					}elseif(strpos($index, "guest_checkVeg") !== false){ // Handle guests
-						$formData["guest_checkVeg"][] = $form['value'];
+					if(strpos($index, "food_preference") !== false){
+						$formData["food_preference"][] = $form['value'];
+					}elseif(strpos($index, "ann_food_preference") !== false){
+						$formData["ann_food_preference"][] = $form['value'];
+					}elseif(strpos($index, "annette_food_preference") !== false){
+						$formData["annette_food_preference"][] = $form['value'];
+					}elseif(strpos($index, "guest_food_preference") !== false){ // Handle guests
+						$formData["guest_food_preference"][] = $form['value'];
 					}elseif(strpos($index, "rotarianSearch") !== false){
 						$formData["rotarianSearch"][] = $form['value'];
 					}else{
